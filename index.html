@@ -159,6 +159,24 @@
       box-shadow: 9px 9px 0 var(--ink);
     }
 
+    /* 教科書級直式分數樣式：徹底杜絕公式解析失敗與怪碼 */
+    .math-frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 0.25rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+    .math-frac > .top {
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 2px;
+    }
+    .math-frac > .bottom {
+      padding-top: 2px;
+    }
+
     /* KaTeX 公式美化微調 */
     .katex {
       font-size: 1.15em !important;
@@ -223,8 +241,8 @@
             <div>
               <h2 class="text-sm sm:text-base font-black text-[#132442] m-0">老師設定說明：</h2>
               <p class="text-xs sm:text-sm text-[#164a84] font-medium m-0 mt-0.5">
-                1. 貼上遊戲連結（如 Wordwall、Quizizz、Blooket）。<br>
-                2. 點擊右上角<strong>「分享連結」</strong>發給學生，學生打開時<strong>只會看到遊戲按鈕，不需自己貼網址！</strong>
+                1. 貼上遊戲連結。<br>
+                2. 點擊右上角<strong>「分享連結」</strong>發給學生，學生打開時<strong>即可看到遊戲按鈕</strong>
               </p>
             </div>
           </div>
@@ -303,7 +321,99 @@
           </div>
           <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">分數、小數與百分數互化</h3>
           <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
-            熟悉基本常規互化（如 $\frac{1}{8} = 12.5\%$）與生活中的應用。
+            熟悉常規互化（如 <span class="math-frac"><span class="top">1</span><span class="bottom">8</span></span> = 12.5%）與生活中的打折、利潤與百分率變化。
+          </p>
+
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('conversion')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
+            </button>
+          </div>
+
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-conversion"></div>
+        </article>
+
+        <!-- 單元 3: 平均數 -->
+        <article class="topic-card p-6" id="card-average">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#eef8f5]">
+              <i data-lucide="bar-chart-2" class="w-6 h-6 text-[#43aa8b]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元三 · 數據處理</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">平均數與統計逆運算</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            透過「總和 ÷ 項數」求平均，以及由平均反求總和或求未知分數的進階題型。
+          </p>
+
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('average')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
+            </button>
+          </div>
+
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-average"></div>
+        </article>
+
+        <!-- 單元 4: 圓形與圓周 -->
+        <article class="topic-card p-6" id="card-circle">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#fcedea]">
+              <i data-lucide="circle-dot" class="w-6 h-6 text-[#f46d43]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元四 · 度量圖形</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">圓周率與圓周計算</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            圓周公式 <i>C = 2πr = πd</i>（取 π ≈ 3.14 或 <span class="math-frac"><span class="top">22</span><span class="bottom">7</span></span>），以及半圓與組合圖形周界。
+          </p>
+
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('circle')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
+            </button>
+          </div>
+
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-circle"></div>
+        </article>
+
+        <!-- 單元 5: 速率 -->
+        <article class="topic-card p-6" id="card-speed">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#eaf4fc]">
+              <i data-lucide="gauge" class="w-6 h-6 text-[#164a84]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元五 · 速率與時間</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">速率、距離與時間</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            核心公式「距離 = 速率 × 時間」，以及 m/s 與 km/h 的單位靈活換算。
+          </p>
+
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('speed')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
+            </button>
+          </div>
+
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-speed"></div>
+        </article>
+
+        <!-- 單元 6: 簡易方程 -->
+        <article class="topic-card p-6" id="card-equation">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#fef5e7]">
+              <i data-lucide="scale" class="w-6 h-6 text-[#f46d43]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元六 · 代數思維</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">簡易方程與文字應用</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            兩步代數方程解法，依據題意設未知數 <i>x</i> 或 <i>y</i> 並列式求解購物與分配問題。
           </p>
 
           <div class="mt-4">
@@ -509,116 +619,196 @@
   </div>
 
   <script>
-    // 6 大課題精編題庫（完全採用標準數學語法，包含分數、乘除符號、圓周率、單位等）
+    // 分數渲染輔助標籤：確保 100% 呈現清晰直式分數，絕不出現未渲染的代碼
+    function frac(top, bottom) {
+      return `<span class="math-frac"><span class="top">${top}</span><span class="bottom">${bottom}</span></span>`;
+    }
+
+    // 6B班數學科全面更新題庫（採用直觀教科書排版，消除怪碼與跳字問題）
     const UNIT_QUESTIONS = {
       decimal: [
         {
-          q: "計算：$4.8 \\div 0.16$ 的值是多少？",
-          options: ["$0.3$", "$3$", "$30$", "$300$"],
+          q: "計算：4.8 ÷ 0.16 的值是多少？",
+          options: ["0.3", "3", "30", "300"],
           correct: 2,
-          hint: "提示：把除數與被除數同時乘以 100，除數化為整數：$480 \\div 16$。",
-          exp: "正確！除數與被除數同乘以 100：$4.8 \\times 100 = 480$，$0.16 \\times 100 = 16$。因此 $480 \\div 16 = 30$。"
+          hint: "提示：把除數與被除數同時乘以 100，將除數化為整數：480 ÷ 16。",
+          exp: "正確！除數與被除數同乘以 100：4.8 × 100 = 480，0.16 × 100 = 16。因此 480 ÷ 16 = 30。"
         },
         {
-          q: "每盒餅乾售 $\$12.5$。小明買了 $4$ 盒，付 $\$100$ 紙幣一張，應找回多少元？",
-          options: ["$\$50$", "$\$48$", "$\$40$", "$\$60$"],
-          correct: 0,
-          hint: "提示：先算 4 盒的總花費 $12.5 \\times 4$，再用 $\$100$ 減去總價。",
-          exp: "正確！4 盒餅乾共需 $12.5 \\times 4 = 50$ 元。應找回 $100 - 50 = 50$ 元。"
+          q: "計算 3.6 ÷ 0.7，商計算至小數點後一個位，其餘數是多少？",
+          options: ["餘 0.1", "餘 0.03", "餘 0.3", "餘 3"],
+          correct: 1,
+          hint: "提示：3.6 ÷ 0.7 = 5.1 ...？驗算：0.7 × 5.1 = 3.57，再用 3.6 減去 3.57 找出餘數。",
+          exp: "正確！商是 5.1。0.7 × 5.1 = 3.57，餘數 = 3.6 - 3.57 = 0.03（注意餘數的小數點位置對齊原本的被除數）。"
         },
         {
-          q: "計算混合運算：$7.2 \\times 1.5 - 3.6 \\div 0.6$ =",
-          options: ["$4.8$", "$6.2$", "$7.2$", "$10.2$"],
+          q: "每盒餅乾售 $12.5。小明買了 4 盒，付 $100 紙幣一張，應找回多少元？",
+          options: ["$50", "$48", "$40", "$60"],
           correct: 0,
-          hint: "提示：四則混合計算規則為「先乘除，後加減」。先算 $7.2 \\times 1.5$ 和 $3.6 \\div 0.6$。",
-          exp: "正確！$7.2 \\times 1.5 = 10.8$，$3.6 \\div 0.6 = 6$。相減得到 $10.8 - 6 = 4.8$。"
+          hint: "提示：先算 4 盒的總花費 12.5 × 4，再用 $100 減去總價。",
+          exp: "正確！4 盒餅乾共需 12.5 × 4 = 50 元。應找回 100 - 50 = 50 元。"
+        },
+        {
+          q: "計算混合運算：7.2 × 1.5 - 3.6 ÷ 0.6 的結果是多少？",
+          options: ["4.8", "6.2", "7.2", "10.2"],
+          correct: 0,
+          hint: "提示：先乘除，後加減。先分別計算 7.2 × 1.5 與 3.6 ÷ 0.6。",
+          exp: "正確！7.2 × 1.5 = 10.8，3.6 ÷ 0.6 = 6。相減得到 10.8 - 6 = 4.8。"
         }
       ],
       conversion: [
         {
-          q: "把分數 $\\frac{3}{8}$ 化為百分數，結果是多少？",
-          options: ["$37.5\\%$", "$38\\%$", "$32.5\\%$", "$35\\%$"],
+          q: `把分數 ${frac(3, 8)} 化為百分數，結果是多少？`,
+          options: ["37.5%", "38%", "32.5%", "35%"],
           correct: 0,
-          hint: "提示：已知 $\\frac{1}{8} = 12.5\\%$，那麼 $3$ 個 $\\frac{1}{8}$ 是多少？也可以計算 $3 \\div 8 \\times 100\\%$。",
-          exp: "正確！$3 \\div 8 = 0.375 = 37.5\\%$。"
+          hint: `提示：已知 ${frac(1, 8)} = 12.5%，那麼 3 個 ${frac(1, 8)} 是多少？也可以直接計算 3 ÷ 8 × 100%。`,
+          exp: `正確！3 ÷ 8 = 0.375 = 37.5%。`
         },
         {
-          q: "一件外套原價 $\$400$，現按「八折」優惠出售，現售價是多少？",
-          options: ["$\$320$", "$\$340$", "$\$360$", "$\$80$"],
+          q: "一件外套原價 $400，現按「八折」優惠出售，現售價是多少元？",
+          options: ["$320", "$340", "$360", "$80"],
           correct: 0,
-          hint: "提示：八折即原價的 $80\\%$（或 $0.8$）。售價 $=$ 原價 $\\times$ 折扣。",
-          exp: "正確！現售價 $= 400 \\times 80\\% = 400 \\times 0.8 = 320$ 元。"
+          hint: "提示：八折即原價的 80%（即 × 0.8）。售價 = 原價 × 折扣率。",
+          exp: "正確！現售價 = 400 × 80% = 400 × 0.8 = 320 元。"
         },
         {
-          q: "將小數 $0.04$ 化為最簡分數：",
-          options: ["$\\frac{1}{4}$", "$\\frac{1}{20}$", "$\\frac{1}{25}$", "$\\frac{4}{25}$"],
+          q: "某款手錶原價 $500，現特價 $425 售出。這隻手錶打了幾折？",
+          options: ["七五折", "八折", "八五折", "九折"],
           correct: 2,
-          hint: "提示：$0.04 = \\frac{4}{100}$，分子和分母同除以最大公因數 $4$ 進行約分。",
-          exp: "正確！$0.04 = \\frac{4}{100} = \\frac{4 \\div 4}{100 \\div 4} = \\frac{1}{25}$。"
+          hint: "提示：折扣率 = 現售價 ÷ 原價。計算 425 ÷ 500 得出的百分比。",
+          exp: "正確！425 ÷ 500 = 0.85 = 85%，85% 即是「八五折」。"
+        },
+        {
+          q: `將小數 0.04 化為最簡分數：`,
+          options: [frac(1, 4), frac(1, 20), frac(1, 25), frac(4, 25)],
+          correct: 2,
+          hint: `提示：0.04 = ${frac(4, 100)}，分子與分母同除以最大公因數 4 進行約分。`,
+          exp: `正確！0.04 = ${frac(4, 100)} = ${frac('4 ÷ 4', '100 ÷ 4')} = ${frac(1, 25)}。`
         }
       ],
       average: [
         {
-          q: "小明前四次常識測驗得分分別為 $80$ 分、$85$ 分、$90$ 分和 $85$ 分，他的平均分是多少？",
-          options: ["$82.5$ 分", "$85$ 分", "$87.5$ 分", "$88$ 分"],
+          q: "小明前四次常識測驗得分分別為 80 分、85 分、90 分和 85 分，他的平均分是多少？",
+          options: ["82.5 分", "85 分", "87.5 分", "88 分"],
           correct: 1,
-          hint: "提示：平均數公式 $=$ 總得分 $\\div$ 次數。即 $(80 + 85 + 90 + 85) \\div 4$。",
-          exp: "正確！總分 $= 80 + 85 + 90 + 85 = 340$ 分，平均分 $= 340 \\div 4 = 85$ 分。"
+          hint: "提示：平均數公式 = 總得分 ÷ 測驗次數。即 (80 + 85 + 90 + 85) ÷ 4。",
+          exp: "正確！總分 = 80 + 85 + 90 + 85 = 340 分，平均分 = 340 ÷ 4 = 85 分。"
         },
         {
-          q: "五個數的平均數是 $14$。若加入一個新數 $20$，這六個數的平均數是多少？",
-          options: ["$14$", "$15$", "$16$", "$17$"],
+          q: "五個數的平均數是 14。若加入一個新數 20，這六個數的平均數是多少？",
+          options: ["14", "15", "16", "17"],
           correct: 1,
-          hint: "提示：原總和 $= 14 \\times 5 = 70$。新總和 $= 70 + 20 = 90$，新項數為 $6$。",
-          exp: "正確！新總和 $= 70 + 20 = 90$。新平均數 $= 90 \\div 6 = 15$。"
+          hint: "提示：原五數總和 = 14 × 5 = 70。加入新數後總和 = 70 + 20 = 90，總項數為 6。",
+          exp: "正確！新總和 = 70 + 20 = 90。新平均數 = 90 ÷ 6 = 15。"
+        },
+        {
+          q: "小華在三次英文測驗的平均分是 78 分。第四次測驗他需要考取多少分，才能使四次測驗的平均分達到 82 分？",
+          options: ["86 分", "90 分", "94 分", "96 分"],
+          correct: 2,
+          hint: "提示：四次測驗所需的總分 = 82 × 4 = 328 分。前三次已得總分 = 78 × 3 = 234 分。",
+          exp: "正確！第四次所需分數 = (82 × 4) - (78 × 3) = 328 - 234 = 94 分。"
+        },
+        {
+          q: "甲組 6 人共植樹 42 棵，乙組 4 人平均每人植樹 8 棵。這兩組同學平均每人植樹多少棵？",
+          options: ["7.4 棵", "7.5 棵", "8 棵", "8.2 棵"],
+          correct: 0,
+          hint: "提示：先求出兩組植樹的「總棵數」與「總人數」。乙組共植樹 4 × 8 = 32 棵。",
+          exp: "正確！總棵數 = 42 + (4 × 8) = 74 棵；總人數 = 6 + 4 = 10 人。平均每人植樹 = 74 ÷ 10 = 7.4 棵。"
         }
       ],
       circle: [
         {
-          q: "一個圓形花圃的直徑為 $14\\text{ m}$，它的周界是多少米？（取 $\\pi = \\frac{22}{7}$）",
-          options: ["$22\\text{ m}$", "$44\\text{ m}$", "$88\\text{ m}$", "$154\\text{ m}$"],
+          q: `一個圓形花圃的直徑為 14 m，它的周界是多少米？（取 π = ${frac(22, 7)}）`,
+          options: ["22 m", "44 m", "88 m", "154 m"],
           correct: 1,
-          hint: "提示：圓周公式 $C = \\pi \\times d$。直接代入 $14 \\times \\frac{22}{7}$。",
-          exp: "正確！$C = 14 \\times \\frac{22}{7} = 2 \\times 22 = 44\\text{ m}$。"
+          hint: `提示：圓周公式 C = π × d。直接代入 14 × ${frac(22, 7)}。`,
+          exp: `正確！C = 14 × ${frac(22, 7)} = 2 × 22 = 44 m。`
         },
         {
-          q: "一個半徑為 $5\\text{ cm}$ 的圓，若取 $\\pi \\approx 3.14$，其圓周是多少？",
-          options: ["$15.7\\text{ cm}$", "$31.4\\text{ cm}$", "$62.8\\text{ cm}$", "$78.5\\text{ cm}$"],
+          q: "一個半徑為 5 cm 的圓形，若取 π ≈ 3.14，其圓周是多少？",
+          options: ["15.7 cm", "31.4 cm", "62.8 cm", "78.5 cm"],
           correct: 1,
-          hint: "提示：直徑 $d = 2 \\times r = 10\\text{ cm}$。圓周 $C = \\pi \\times d = 3.14 \\times 10$。",
-          exp: "正確！$C = 2 \\times 3.14 \\times 5 = 31.4\\text{ cm}$。"
+          hint: "提示：直徑 d = 2 × r = 10 cm。圓周 C = 2 × π × r = 2 × 3.14 × 5。",
+          exp: "正確！圓周 C = 2 × 3.14 × 5 = 31.4 cm。"
+        },
+        {
+          q: `一個半徑為 7 cm 的「半圓形」，它的周界是多少？（取 π = ${frac(22, 7)}）`,
+          options: ["22 cm", "36 cm", "44 cm", "58 cm"],
+          correct: 1,
+          hint: `提示：注意！半圓周界 = 半圓弧長 + 直徑！半圓弧長 = 2 × ${frac(22, 7)} × 7 ÷ 2 = 22 cm，別忘了加上一條直徑！`,
+          exp: `正確！半圓弧長 = 22 cm，直徑 = 7 × 2 = 14 cm。半圓周界 = 22 + 14 = 36 cm（很多同學常漏加直徑，做得很好！）。`
+        },
+        {
+          q: "一個圓形車輪的直徑是 50 cm。若車輪在地上滾動了 100 圈，共行駛了約多少米？（取 π ≈ 3.14）",
+          options: ["15.7 m", "157 m", "314 m", "1570 m"],
+          correct: 1,
+          hint: "提示：滾動 1 圈的距離即圓周 C = π × d。算出行駛厘米數後，再除以 100 化為米 (m)。",
+          exp: "正確！1 圈距離 = 3.14 × 50 = 157 cm。100 圈總距離 = 157 × 100 = 15700 cm = 157 m。"
         }
       ],
       speed: [
         {
-          q: "一輛快車以每小時 $90\\text{ km}$ 的速率行駛，行駛了 $30$ 分鐘，共走了多少公里？",
-          options: ["$45\\text{ km}$", "$30\\text{ km}$", "$60\\text{ km}$", "$180\\text{ km}$"],
-          correct: 0,
-          hint: "提示：注意單位換算！$30$ 分鐘等於 $0.5$ 小時。距離 $=$ 速率 $\\times$ 時間。",
-          exp: "正確！距離 $= 90\\text{ km/h} \\times 0.5\\text{ h} = 45\\text{ km}$。"
+          q: "一輛快車以每小時 90 km 的速率行駛，行駛了 40 分鐘，共走了多少公里？",
+          options: ["45 km", "60 km", "75 km", "120 km"],
+          correct: 1,
+          hint: `提示：注意單位換算！40 分鐘等於 ${frac(40, 60)} = ${frac(2, 3)} 小時。距離 = 速率 × 時間。`,
+          exp: `正確！時間 = ${frac(40, 60)} = ${frac(2, 3)} 小時。距離 = 90 × ${frac(2, 3)} = 60 km。`
         },
         {
-          q: "跑手以 $6\\text{ m/s}$ 的速率跑了 $120\\text{ m}$，他用了多少秒？",
-          options: ["$15$ 秒", "$20$ 秒", "$24$ 秒", "$720$ 秒"],
+          q: "跑手以 6 m/s 的速率跑了 150 米，他用了多少秒？",
+          options: ["20 秒", "25 秒", "30 秒", "900 秒"],
           correct: 1,
-          hint: "提示：時間 $=$ 距離 $\\div$ 速率。即 $120 \\div 6$。",
-          exp: "正確！時間 $= 120 \\div 6 = 20$ 秒。"
+          hint: "提示：時間 = 距離 ÷ 速率。即 150 ÷ 6。",
+          exp: "正確！時間 = 150 ÷ 6 = 25 秒。"
+        },
+        {
+          q: "速率單位換算：汽車速率為 72 km/h，若轉換為每秒米 (m/s)，是多少？",
+          options: ["15 m/s", "20 m/s", "25 m/s", "30 m/s"],
+          correct: 1,
+          hint: "提示：1 小時 = 3600 秒，1 公里 = 1000 米。計算 72 × 1000 ÷ 3600。",
+          exp: "正確！72 km/h = 72000 m ÷ 3600 s = 20 m/s。"
+        },
+        {
+          q: "小剛和小強同時從學校出發前往 1200 米外的圖書館。小剛步行速率是 60 m/min，小強跑步速率是 100 m/min。當小強到達圖書館時，小剛離圖書館還有多少米？",
+          options: ["400 米", "480 米", "520 米", "720 米"],
+          correct: 1,
+          hint: "提示：小強到達所需時間 = 1200 ÷ 100 = 12 分鐘。此時小剛走了 60 × 12 = 720 米。",
+          exp: "正確！小強花費 1200 ÷ 100 = 12 分鐘到達。此時小剛走了 60 × 12 = 720 米，離圖書館還有 1200 - 720 = 480 米。"
         }
       ],
       equation: [
         {
-          q: "解方程：$3x + 7 = 25$。求未知數 $x$ 的值：",
-          options: ["$4$", "$6$", "$8$", "$10$"],
+          q: "解方程：3<i>x</i> + 7 = 25。求未知數 <i>x</i> 的值：",
+          options: ["4", "6", "8", "10"],
           correct: 1,
-          hint: "提示：天平兩邊同時減去 $7$，得 $3x = 18$；再兩邊同除以 $3$。",
-          exp: "正確！$3x = 25 - 7 = 18$，兩邊除以 3 得 $x = 6$。"
+          hint: "提示：天平兩邊同時減去 7，得 3x = 18；兩邊再同除以 3。",
+          exp: "正確！3x = 25 - 7 = 18，兩邊除以 3 得 x = 6。"
         },
         {
-          q: "某數的 $4$ 倍減去 $5$ 等於 $19$。若設某數為 $y$，下列哪道方程正確？",
-          options: ["$4y + 5 = 19$", "$4y - 5 = 19$", "$4(y - 5) = 19$", "$\\frac{y}{4} - 5 = 19$"],
-          correct: 1,
-          hint: "提示：某數的 4 倍寫作 $4y$，「減去 5」寫作 $- 5$。",
-          exp: "正確！正確方程為 $4y - 5 = 19$。"
+          q: "解方程：4(<i>y</i> - 3) = 28。求未知數 <i>y</i> 的值：",
+          options: ["7", "9", "10", "12"],
+          correct: 2,
+          hint: "提示：兩邊先同除以 4，得 y - 3 = 7；再在兩邊同時加上 3。",
+          exp: "正確！y - 3 = 28 ÷ 4 = 7，y = 7 + 3 = 10。"
+        },
+        {
+          q: "小明有鉛筆若干枝，買了 5 枝後，將所有鉛筆平均分給 3 位同學，每人分得 8 枝。設小明原有鉛筆 <i>x</i> 枝，下列哪道方程正確？",
+          options: [
+            "(<i>x</i> + 5) ÷ 3 = 8",
+            "<i>x</i> + 5 ÷ 3 = 8",
+            "3<i>x</i> + 5 = 8",
+            "(<i>x</i> - 5) ÷ 3 = 8"
+          ],
+          correct: 0,
+          hint: "提示：買了 5 枝後總共有 (x + 5) 枝，平均分給 3 人需用括號包住再除以 3。",
+          exp: "正確！買入後共有 (x + 5) 枝，平均分配給 3 人即 (x + 5) ÷ 3 = 8。"
+        },
+        {
+          q: `解方程：${frac('<i>m</i>', 5)} - 4 = 6。求未知數 <i>m</i> 的值：`,
+          options: ["10", "30", "50", "60"],
+          correct: 2,
+          hint: `提示：兩邊先同時加 4，得 ${frac('<i>m</i>', 5)} = 10；兩邊再同乘以 5。`,
+          exp: "正確！m ÷ 5 = 6 + 4 = 10，兩邊乘以 5 得 m = 10 × 5 = 50。"
         }
       ]
     };
@@ -642,16 +832,20 @@
     let currentQIndex = 0;
     let answered = false;
 
-    // KaTeX 渲染輔助函式
+    // KaTeX / 數學輔助排版（若存在 KaTeX 則渲染其餘標籤）
     function renderMath(element) {
       if (window.renderMathInElement && element) {
-        renderMathInElement(element, {
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "$", right: "$", display: false }
-          ],
-          throwOnError: false
-        });
+        try {
+          renderMathInElement(element, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "\\(", right: "\\)", display: false }
+            ],
+            throwOnError: false
+          });
+        } catch (e) {
+          // 容錯機制
+        }
       }
     }
 
@@ -844,7 +1038,7 @@
         showToast(
           "學生專用連結已複製！",
           hasLink 
-            ? "已將所有設定好的遊戲打包完成！直接將此連結發送至班級群組、Google Classroom 或電子白板，學生開啟後即是乾淨的遊戲介面。"
+            ? "已將所有設定好的遊戲打包完成！直接將此連結發送至Google Classroom 或電子白板，學生開啟後即是乾淨的遊戲介面。"
             : "注意：目前尚未輸入任何遊戲網址，學生將主要進行內建模擬題庫練習。隨時填入網址後重新複製即可！",
           "success"
         );
@@ -883,7 +1077,7 @@
       const qEl = document.getElementById("game-question");
       qEl.innerHTML = q.q;
 
-      // 提示
+      // 提示欄
       const hintEl = document.getElementById("game-hint");
       if (q.hint) {
         hintEl.innerHTML = q.hint;
@@ -904,7 +1098,7 @@
         const btn = document.createElement("button");
         btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-[#132442] bg-white font-bold text-sm md:text-base hover:bg-[#ffd166]/25 transition-all flex items-center justify-between";
         btn.innerHTML = `
-          <span>
+          <span class="flex items-center flex-wrap">
             <strong class="mr-2 text-[#164a84] font-black">${String.fromCharCode(65 + idx)}.</strong>
             <span>${optText}</span>
           </span>
@@ -913,7 +1107,7 @@
         optContainer.appendChild(btn);
       });
 
-      // 渲染題目與選項中的數學符號
+      // 執行輔助渲染
       renderMath(qEl);
       renderMath(hintEl);
       renderMath(optContainer);
