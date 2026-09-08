@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>6B班數學遊戲互動平台</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+  <!-- KaTeX 數學公式引擎（徹底解決數學符號亂碼） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -37,7 +45,7 @@
     }
 
     .topbar {
-      background: rgba(255, 250, 240, .92);
+      background: rgba(255, 250, 240, .94);
       border-bottom: 2px solid rgba(19, 36, 66, .12);
       backdrop-filter: blur(12px);
     }
@@ -53,35 +61,13 @@
       box-shadow: 3px 3px 0 var(--yellow);
     }
 
-    .hero-orbit {
-      position: absolute;
-      top: -80px;
-      right: -40px;
-      width: 220px;
-      height: 220px;
-      pointer-events: none;
-      border: 28px solid rgba(255, 209, 102, .45);
-      border-radius: 50%;
-    }
-
-    .hero-dots {
-      position: absolute;
-      right: 40px;
-      bottom: 20px;
-      width: 96px;
-      height: 56px;
-      opacity: .55;
-      background-image: radial-gradient(var(--ink) 2px, transparent 2px);
-      background-size: 14px 14px;
-    }
-
     .topic-card {
       position: relative;
       display: flex;
       flex-direction: column;
       background: var(--card-bg);
       border: 2px solid var(--ink);
-      border-radius: 26px;
+      border-radius: 24px;
       box-shadow: 6px 6px 0 var(--ink);
       transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .2s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -93,12 +79,12 @@
 
     .topic-icon {
       display: grid;
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       place-items: center;
       background: rgba(255, 255, 255, .9);
       border: 2px solid var(--ink);
-      border-radius: 18px;
+      border-radius: 16px;
       box-shadow: 2px 2px 0 var(--ink);
     }
 
@@ -111,31 +97,6 @@
       font-size: .78rem;
       font-weight: 800;
       background: var(--yellow);
-    }
-
-    .game-frame {
-      margin-top: auto;
-      padding: 1.1rem;
-      background: #fdfaf2;
-      border: 2px dashed rgba(19, 36, 66, .4);
-      border-radius: 20px;
-    }
-
-    .url-input {
-      width: 100%;
-      min-width: 0;
-      padding: .65rem .85rem;
-      font-size: .88rem;
-      color: var(--ink);
-      background: #ffffff;
-      border: 2px solid var(--ink);
-      border-radius: 12px;
-      outline: none;
-      transition: border-color .15s ease;
-    }
-
-    .url-input:focus {
-      border-color: var(--orange);
     }
 
     .btn-brutal {
@@ -160,7 +121,6 @@
       background: var(--navy);
       box-shadow: 3px 3px 0 var(--ink);
     }
-
     .btn-navy:hover {
       background: #1e5ba1;
       transform: translateY(-2px);
@@ -172,329 +132,293 @@
       background: var(--orange);
       box-shadow: 3px 3px 0 var(--ink);
     }
-
     .btn-orange:hover {
       background: #ff7b52;
       transform: translateY(-2px);
       box-shadow: 4px 4px 0 var(--ink);
     }
 
-    .btn-clear {
-      color: var(--ink);
-      background: transparent;
-      border: none;
-      border-bottom: 1.5px solid rgba(19, 36, 66, .45);
-      border-radius: 0;
-      cursor: pointer;
-      font-weight: 700;
-      padding: 2px 4px;
+    .btn-mint {
+      color: #fff;
+      background: var(--mint);
+      box-shadow: 3px 3px 0 var(--ink);
     }
-
-    .btn-clear:hover {
-      color: var(--orange);
-      border-bottom-color: var(--orange);
+    .btn-mint:hover {
+      background: #39967a;
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0 var(--ink);
     }
 
     .modal-backdrop {
-      background: rgba(19, 36, 66, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(19, 36, 66, 0.72);
+      backdrop-filter: blur(5px);
     }
 
     .modal-box {
       border: 3px solid var(--ink);
       box-shadow: 9px 9px 0 var(--ink);
     }
+
+    /* KaTeX 公式美化微調 */
+    .katex {
+      font-size: 1.15em !important;
+      color: var(--ink);
+    }
+    .katex-display {
+      margin: 0.7em 0 !important;
+    }
   </style>
 </head>
 <body>
   <div class="min-h-screen flex flex-col">
-    <!-- 頂部導航欄 -->
+    <!-- 導航欄 -->
     <header class="topbar sticky top-0 z-30">
-      <div class="w-full max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between">
+      <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="brand-mark" aria-hidden="true">
-            <i data-lucide="sigma" class="w-6 h-6"></i>
+            <i data-lucide="calculator" class="w-6 h-6"></i>
           </div>
           <div>
-            <p class="m-0 text-base sm:text-lg font-black tracking-tight text-[#132442]">6B 班數學冒險平台</p>
-            <p class="m-0 text-xs text-[#164a84] font-bold opacity-80">六年級數學核心技能遊戲基地</p>
+            <div class="flex items-center gap-2">
+              <h1 class="m-0 text-base sm:text-lg font-black tracking-tight text-[#132442]">6B 班數學遊戲專用平台</h1>
+              <span id="role-badge" class="px-2 py-0.5 rounded-full text-xs font-black border border-[#132442] bg-[#ffd166]">
+                老師設定模式
+              </span>
+            </div>
+            <p class="m-0 text-xs text-[#164a84] font-bold opacity-80">六年級核心技能 · 支援自選平台與內建模擬題</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
-          <div class="hidden sm:flex items-center gap-2 text-xs md:text-sm font-bold bg-white/80 border-2 border-[#132442] px-3.5 py-1.5 rounded-full shadow-[2px_2px_0_#132442]">
-            <i data-lucide="gamepad-2" class="w-4 h-4 text-[#f46d43]"></i>
-            <span>隨點即玩 · 支援自訂網址</span>
-          </div>
-          <button onclick="openStatsModal()" class="btn-brutal bg-[#ffd166] text-[#132442] px-3 py-1.5 text-xs md:text-sm shadow-[2px_2px_0_#132442]">
+        <div class="flex items-center gap-2.5">
+          <!-- 複製分享按鈕 (老師模式下顯眼展示) -->
+          <button id="btn-share-student" onclick="generateAndCopyShareLink()" class="btn-brutal btn-orange px-3.5 py-1.5 text-xs sm:text-sm">
+            <i data-lucide="share-2" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">複製分享連結</span>
+            <span class="sm:hidden">分享</span>
+          </button>
+          
+          <!-- 切換模式按鈕 -->
+          <button onclick="toggleMode()" class="btn-brutal bg-white px-3 py-1.5 text-xs sm:text-sm shadow-[2px_2px_0_#132442]" title="切換老師/學生預覽">
+            <i data-lucide="refresh-cw" class="w-4 h-4 text-[#164a84]"></i>
+            <span id="toggle-mode-text" class="hidden md:inline">預覽學生畫面</span>
+          </button>
+
+          <!-- 戰報按鈕 -->
+          <button onclick="openStatsModal()" class="btn-brutal bg-[#ffd166] text-[#132442] px-3 py-1.5 text-xs sm:text-sm shadow-[2px_2px_0_#132442]">
             <i data-lucide="trophy" class="w-4 h-4"></i>
-            <span>得分排行</span>
+            <span class="hidden sm:inline">我的戰報</span>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- 主內容區 -->
-    <main class="w-full max-w-6xl mx-auto px-5 py-8 md:py-12 flex-1">
-      <!-- 頂部橫幅 (Hero) -->
-      <section class="relative overflow-hidden rounded-[28px] border-3 border-[#132442] bg-[#ffffff] px-6 py-8 md:px-10 md:py-10 shadow-[8px_8px_0_#132442]">
-        <div class="hero-orbit"></div>
-        <div class="hero-dots"></div>
-
-        <div class="relative z-10 max-w-2xl">
-          <div class="inline-flex items-center gap-2 rounded-full border border-[#132442] bg-[#ffd166] px-3.5 py-1 text-xs md:text-sm font-black text-[#132442] shadow-[2px_2px_0_#132442]">
-            <i data-lucide="sparkles" class="w-4 h-4 text-[#f46d43]"></i>
-            <span>2026-2027 升中特訓版</span>
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-1">
+      <!-- 老師設定導引列 (僅老師模式可見) -->
+      <div id="teacher-guide" class="mb-6 rounded-2xl border-2 border-[#132442] bg-[#eaf4fc] p-4 sm:p-5 shadow-[4px_4px_0_#132442]">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#164a84] text-white flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="wrench" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="text-sm sm:text-base font-black text-[#132442] m-0">老師設定說明：</h2>
+              <p class="text-xs sm:text-sm text-[#164a84] font-medium m-0 mt-0.5">
+                1. 貼上遊戲連結（如 Wordwall、Quizizz、Blooket）。<br>
+                2. 點擊右上角<strong>「分享連結」</strong>發給學生，學生打開時<strong>只會看到遊戲按鈕，不需自己貼網址！</strong>
+              </p>
+            </div>
           </div>
-          <h1 class="mt-4 mb-2 text-2xl sm:text-3xl md:text-4xl font-black leading-tight text-[#132442]">
-            動腦挑戰！解鎖你的數學超能力
-          </h1>
-          <p class="max-w-xl text-sm md:text-base leading-relaxed text-[#164a84] font-medium">
-            收錄六年級 6 大關鍵數學主題。每個單元都配備了「<strong>即刻挑戰小遊戲</strong>」，同時支援老師或同學貼入自己的自訂練習連結（如 Wordwall、Quizizz、Blooket）！
-          </p>
-
-          <div class="mt-5 flex flex-wrap items-center gap-3 text-xs md:text-sm font-bold">
-            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
-              <i data-lucide="check-circle" class="w-4 h-4 text-[#43aa8b]"></i> 支援離線直接遊玩
-            </span>
-            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
-              <i data-lucide="zap" class="w-4 h-4 text-[#f46d43]"></i> 即時解答與回饋
-            </span>
-            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
-              <i data-lucide="bookmark" class="w-4 h-4 text-[#164a84]"></i> 網址自動儲存
-            </span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 單元清單標題列 -->
-      <div class="mt-10 mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 class="m-0 text-2xl font-black text-[#132442] flex items-center gap-2">
-            <i data-lucide="layout-grid" class="w-6 h-6 text-[#164a84]"></i>
-            6B 數學單元挑戰庫
-          </h2>
-          <p class="mt-1 mb-0 text-sm text-[#164a84] opacity-80 font-medium">
-            點擊「直接挑戰」進入內建互動題目，或於下方輸入老師指派的遊戲網址。
-          </p>
-        </div>
-        <div class="tag text-xs font-black shadow-[2px_2px_0_#132442]">
-          共 6 個單元已就緒
+          <button onclick="generateAndCopyShareLink()" class="btn-brutal btn-navy px-4 py-2 text-xs font-black shrink-0 w-full sm:w-auto">
+            <i data-lucide="link" class="w-3.5 h-3.5"></i> 立即產生分享網址
+          </button>
         </div>
       </div>
 
-      <!-- 6 大主題卡片網格 -->
+      <!-- 學生歡迎橫幅 (僅學生模式可見) -->
+      <div id="student-banner" class="hidden mb-6 rounded-2xl border-2 border-[#132442] bg-[#fef5e7] p-5 shadow-[4px_4px_0_#132442]">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#f46d43] text-white flex items-center justify-center shrink-0">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-[#132442] m-0">同學你好！歡迎來到 6B 班專屬數學挑戰站</h2>
+            <p class="text-xs sm:text-sm text-[#164a84] font-medium m-0 mt-0.5">
+              點擊綠色按鈕即可進入老師指派的闖關遊戲，或點擊「直接挑戰模擬題」來自我複習！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="m-0 text-xl sm:text-2xl font-black text-[#132442] flex items-center gap-2">
+            <i data-lucide="layout-grid" class="w-6 h-6 text-[#164a84]"></i>
+            6B班數學科學習任務
+          </h2>
+          <p class="mt-1 mb-0 text-xs sm:text-sm text-[#164a84] opacity-85 font-medium">
+            全單元皆配備詳解，點擊隨開隨測。
+          </p>
+        </div>
+        <div class="tag text-xs font-black shadow-[2px_2px_0_#132442]">
+          數學核心素養 · 6B積極備戰
+        </div>
+      </div>
+
       <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="數學單元卡片">
         
-        <!-- 卡片 1: 小數乘除 -->
+        <!-- 單元 1: 小數乘除 -->
         <article class="topic-card p-6" id="card-decimal">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#eaf4fc]">
-              <i data-lucide="calculator" class="w-7 h-7 text-[#164a84]"></i>
+              <i data-lucide="divide" class="w-6 h-6 text-[#164a84]"></i>
             </div>
             <span class="tag bg-[#ffd166]">單元一 · 數與代數</span>
           </div>
-          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">小數四則與混合計算</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            掌握小數除法中的小數點對齊、補零運算，以及包含括號的四則混合應用題。
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">小數四則與混合運算</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            小數除法中除數化整、補零概念，以及含有括號與混合運算的綜合應用。
           </p>
           
-          <div class="my-4">
-            <button onclick="startBuiltInGame('decimal')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <!-- 內建模擬題挑戰按鈕 -->
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('decimal')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="decimal-url">自訂遊戲網址：</label>
-            <input id="decimal-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Wordwall)" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('decimal')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('decimal')">清除</button>
-            </div>
-            <p id="decimal-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          <!-- 遊戲連結容器 (動態切換老師編輯/學生點擊) -->
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-decimal">
+            <!-- 內容由 JavaScript 依據角色動態生成 -->
           </div>
         </article>
 
-        <!-- 卡片 2: 分小百互化 -->
+        <!-- 單元 2: 分小百互化與應用 -->
         <article class="topic-card p-6" id="card-conversion">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#fef5e7]">
-              <i data-lucide="arrow-left-right" class="w-7 h-7 text-[#f46d43]"></i>
+              <i data-lucide="percent" class="w-6 h-6 text-[#f46d43]"></i>
             </div>
             <span class="tag bg-[#ffd166]">單元二 · 百分數</span>
           </div>
           <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">分數、小數與百分數互化</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            熟練常見的分數、小數與百分數對應（如 1/8 = 12.5%），以及折扣與折讓計算。
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            熟悉基本常規互化（如 $\frac{1}{8} = 12.5\%$）與生活中的打折、利潤與百分率變化。
           </p>
 
-          <div class="my-4">
-            <button onclick="startBuiltInGame('conversion')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('conversion')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="conversion-url">自訂遊戲網址：</label>
-            <input id="conversion-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Kahoot)" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('conversion')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('conversion')">清除</button>
-            </div>
-            <p id="conversion-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
-          </div>
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-conversion"></div>
         </article>
 
-        <!-- 卡片 3: 平均數 -->
+        <!-- 單元 3: 平均數 -->
         <article class="topic-card p-6" id="card-average">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#eef8f5]">
-              <i data-lucide="bar-chart-3" class="w-7 h-7 text-[#43aa8b]"></i>
+              <i data-lucide="bar-chart-2" class="w-6 h-6 text-[#43aa8b]"></i>
             </div>
             <span class="tag bg-[#ffd166]">單元三 · 數據處理</span>
           </div>
-          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">平均數與統計分析</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            透過「總和 ÷ 項數」快速求平均，並解答加入新數據或遺漏分數的逆運算問題。
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">平均數與統計逆運算</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            透過「總和 $\div$ 項數」求平均，以及由平均反求總和或求未知分數的進階題型。
           </p>
 
-          <div class="my-4">
-            <button onclick="startBuiltInGame('average')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('average')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="average-url">自訂遊戲網址：</label>
-            <input id="average-url" class="url-input" type="url" placeholder="貼上自訂連結" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('average')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('average')">清除</button>
-            </div>
-            <p id="average-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
-          </div>
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-average"></div>
         </article>
 
-        <!-- 卡片 4: 圓形與圓周 -->
+        <!-- 單元 4: 圓形與圓周 -->
         <article class="topic-card p-6" id="card-circle">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#fcedea]">
-              <i data-lucide="circle" class="w-7 h-7 text-[#f46d43]"></i>
+              <i data-lucide="circle-dot" class="w-6 h-6 text-[#f46d43]"></i>
             </div>
-            <span class="tag bg-[#ffd166]">單元四 · 度量與圖形</span>
+            <span class="tag bg-[#ffd166]">單元四 · 度量圖形</span>
           </div>
           <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">圓周率與圓周計算</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            運用 $C = 2\pi r$ 或 $C = \pi d$（取 $\pi \approx 3.14$ 或 $22/7$），計算跑道與組合圖形周界。
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            圓周公式 $C = 2\pi r = \pi d$（取 $\pi = 3.14$ 或 $\frac{22}{7}$），以及半圓與組合圖形周界。
           </p>
 
-          <div class="my-4">
-            <button onclick="startBuiltInGame('circle')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('circle')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="circle-url">自訂遊戲網址：</label>
-            <input id="circle-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Quizlet)" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('circle')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('circle')">清除</button>
-            </div>
-            <p id="circle-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
-          </div>
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-circle"></div>
         </article>
 
-        <!-- 卡片 5: 速率 -->
+        <!-- 單元 5: 速率 -->
         <article class="topic-card p-6" id="card-speed">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#eaf4fc]">
-              <i data-lucide="gauge" class="w-7 h-7 text-[#164a84]"></i>
+              <i data-lucide="gauge" class="w-6 h-6 text-[#164a84]"></i>
             </div>
             <span class="tag bg-[#ffd166]">單元五 · 速率與時間</span>
           </div>
           <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">速率、距離與時間</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            精通「距離 = 速率 × 時間」，並搞懂 $\text{m/s}$ 與 $\text{km/h}$ 之間的單位換算。
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            核心公式「距離 $=$ 速率 $\times$ 時間」，以及 $\text{m/s}$ 與 $\text{km/h}$ 的單位靈活換算。
           </p>
 
-          <div class="my-4">
-            <button onclick="startBuiltInGame('speed')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('speed')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="speed-url">自訂遊戲網址：</label>
-            <input id="speed-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Blooket)" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('speed')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('speed')">清除</button>
-            </div>
-            <p id="speed-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
-          </div>
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-speed"></div>
         </article>
 
-        <!-- 卡片 6: 簡易方程 -->
+        <!-- 單元 6: 簡易方程 -->
         <article class="topic-card p-6" id="card-equation">
           <div class="flex items-start justify-between gap-4">
             <div class="topic-icon bg-[#fef5e7]">
-              <i data-lucide="variable" class="w-7 h-7 text-[#f46d43]"></i>
+              <i data-lucide="scale" class="w-6 h-6 text-[#f46d43]"></i>
             </div>
             <span class="tag bg-[#ffd166]">單元六 · 代數思維</span>
           </div>
-          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">簡易方程與應用題</h3>
-          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
-            利用天平平衡概念解兩步驟方程，從日常生活文字情境列式並求出未知數 $x$。
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">簡易方程與文字應用</h3>
+          <p class="mt-0 text-xs sm:text-sm text-[#164a84] opacity-85 leading-relaxed">
+            兩步代數方程解法，依據題意設未知數 $x$ 或 $y$ 並列式求解購物與分配問題。
           </p>
 
-          <div class="my-4">
-            <button onclick="startBuiltInGame('equation')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
-              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-              <span>直接挑戰內建模擬題</span>
+          <div class="mt-4">
+            <button onclick="startBuiltInGame('equation')" class="w-full btn-brutal btn-orange py-2.5 text-xs sm:text-sm">
+              <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+              <span>挑戰內建模擬題庫</span>
             </button>
           </div>
 
-          <div class="game-frame">
-            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="equation-url">自訂遊戲網址：</label>
-            <input id="equation-url" class="url-input" type="url" placeholder="貼上自訂連結" />
-            <div class="mt-3 flex items-center justify-between gap-2">
-              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('equation')">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
-              </button>
-              <button class="btn-clear text-xs" type="button" onclick="clearGame('equation')">清除</button>
-            </div>
-            <p id="equation-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
-          </div>
+          <div class="mt-4 pt-4 border-t-2 border-dashed border-[#132442]/20" id="box-equation"></div>
         </article>
 
       </section>
     </main>
 
     <!-- 頁尾 -->
-    <footer class="w-full max-w-6xl mx-auto px-5 py-8 text-center">
+    <footer class="w-full max-w-6xl mx-auto px-4 py-8 text-center">
       <div class="border-t-2 border-[#132442]/15 pt-6">
-        <p class="m-0 text-sm font-bold text-[#164a84]">
-          6B班 數學科教學資源平台 · 鼓勵自主探究與數學思維訓練
+        <p class="m-0 text-xs sm:text-sm font-bold text-[#164a84]">
+          6B 班 數學科自主學習互動站
         </p>
         <p class="mt-1 text-xs text-[#132442] opacity-60">
-          貼心提示：自訂連結會自動儲存在這台電腦的瀏覽器中，下次打開不會遺失。
+          老師分享網址後，學生會自動接收指派的遊戲。
         </p>
       </div>
     </footer>
@@ -502,25 +426,26 @@
 
   <!-- 內建互動遊戲視窗 (Modal) -->
   <div id="game-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
-    <div class="modal-box bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 relative flex flex-col max-h-[90vh] overflow-y-auto">
+    <div class="modal-box bg-white w-full max-w-xl rounded-3xl p-6 sm:p-8 relative flex flex-col max-h-[92vh] overflow-y-auto">
       
       <!-- 關閉按鈕 -->
-      <button onclick="closeGameModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-[#132442] font-black">
+      <button onclick="closeGameModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-[#132442] font-black">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
       <!-- 標題資訊 -->
       <div class="flex items-center gap-3">
         <span id="game-category-tag" class="tag bg-[#ffd166] text-xs">小數運算</span>
-        <span id="game-progress" class="text-xs font-extrabold text-[#164a84]">題目 1 / 3</span>
+        <span id="game-progress" class="text-xs font-extrabold text-[#164a84]">第 1 題 / 共 3 題</span>
       </div>
 
-      <h3 id="game-question" class="text-xl md:text-2xl font-black text-[#132442] mt-4 mb-5 leading-snug">
+      <!-- 題目內容 (支援 KaTeX 公式渲染) -->
+      <div id="game-question" class="text-lg sm:text-xl font-bold text-[#132442] mt-4 mb-4 leading-relaxed">
         載入中...
-      </h3>
+      </div>
 
       <!-- 提示欄 -->
-      <div id="game-hint" class="text-xs text-[#164a84] bg-[#f0f7ff] border-l-4 border-[#164a84] p-3 rounded-r-xl mb-5 hidden">
+      <div id="game-hint" class="text-xs sm:text-sm text-[#164a84] bg-[#f0f7ff] border-l-4 border-[#164a84] p-3 rounded-r-xl mb-4 hidden">
       </div>
 
       <!-- 選項容器 -->
@@ -530,30 +455,30 @@
 
       <!-- 回饋訊息欄 -->
       <div id="game-feedback" class="mt-4 p-4 rounded-2xl border-2 border-[#132442] hidden">
-        <p id="game-feedback-text" class="text-sm font-bold m-0"></p>
+        <div id="game-feedback-text" class="text-xs sm:text-sm font-medium leading-relaxed"></div>
         <button id="next-question-btn" onclick="nextQuestion()" class="mt-3 btn-brutal btn-orange px-5 py-2 text-xs font-black">
-          下一題 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          <span>下一題</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </button>
       </div>
 
     </div>
   </div>
 
-  <!-- 成績排行榜 / 學習概覽視窗 -->
+  <!-- 戰報視窗 -->
   <div id="stats-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
     <div class="modal-box bg-white w-full max-w-md rounded-3xl p-6 relative">
-      <button onclick="closeStatsModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200">
+      <button onclick="closeStatsModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <div class="flex items-center gap-2 mb-4">
+      <div class="flex items-center gap-2 mb-3">
         <i data-lucide="award" class="w-6 h-6 text-[#f46d43]"></i>
-        <h3 class="text-xl font-black text-[#132442] m-0">我的挑戰戰報</h3>
+        <h3 class="text-lg sm:text-xl font-black text-[#132442] m-0">我的數學答題戰報</h3>
       </div>
       <p class="text-xs text-[#164a84] font-medium mb-4">你在本機裝置所累積的內建小遊戲成果：</p>
       
       <div class="bg-[#fffaf0] border-2 border-[#132442] p-4 rounded-2xl mb-4 flex justify-around text-center">
         <div>
-          <p class="text-xs font-bold text-gray-500 m-0">總答對題數</p>
+          <p class="text-xs font-bold text-gray-500 m-0">累計答對題數</p>
           <p id="stat-total-correct" class="text-2xl font-black text-[#43aa8b] m-0">0</p>
         </div>
         <div class="border-r border-[#132442]/20"></div>
@@ -563,127 +488,142 @@
         </div>
       </div>
 
-      <button onclick="resetStats()" class="btn-clear text-xs text-gray-500 w-full text-center py-1">
-        重設我的答題紀錄
+      <button onclick="showConfirmResetModal()" class="w-full text-center py-2 text-xs font-bold text-red-600 hover:underline">
+        重設我的作答記錄
       </button>
     </div>
   </div>
 
+  <!-- 自訂提示視窗 (取代 alert / confirm) -->
+  <div id="toast-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="modal-box bg-white w-full max-w-sm rounded-3xl p-6 relative text-center">
+      <div id="toast-icon-container" class="w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center bg-green-100 text-[#43aa8b]">
+        <i data-lucide="check-circle" class="w-7 h-7"></i>
+      </div>
+      <h4 id="toast-title" class="text-lg font-black text-[#132442] mb-1">分享網址已複製</h4>
+      <p id="toast-message" class="text-xs text-[#164a84] mb-5 font-medium leading-relaxed"></p>
+      <div id="toast-actions" class="flex justify-center gap-3">
+        <button onclick="closeToast()" class="btn-brutal btn-navy px-5 py-2 text-xs font-black">確定</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // 6 大單元內建挑戰題庫 (每個主題精選題目)
+    // 6 大課題精編題庫（完全採用標準數學語法，包含分數、乘除符號、圓周率、單位等）
     const UNIT_QUESTIONS = {
       decimal: [
         {
           q: "計算：$4.8 \\div 0.16$ 的值是多少？",
-          options: ["0.3", "3", "30", "300"],
+          options: ["$0.3$", "$3$", "$30$", "$300$"],
           correct: 2,
-          hint: "提示：把被除數和除數同時乘以 100，變成 480 ÷ 16。",
-          exp: "正確！除數與被除數同乘 100 後得 480 ÷ 16 = 30。"
+          hint: "提示：把除數與被除數同時乘以 100，除數化為整數：$480 \\div 16$。",
+          exp: "正確！除數與被除數同乘以 100：$4.8 \\times 100 = 480$，$0.16 \\times 100 = 16$。因此 $480 \\div 16 = 30$。"
         },
         {
-          q: "一盒餅乾售 12.5 元，小明買了 4 盒，付 100 元應找回多少元？",
-          options: ["50 元", "48 元", "40 元", "60 元"],
+          q: "每盒餅乾售 $\$12.5$。小明買了 $4$ 盒，付 $\$100$ 紙幣一張，應找回多少元？",
+          options: ["$\$50$", "$\$48$", "$\$40$", "$\$60$"],
           correct: 0,
-          hint: "提示：先算 4 盒總價 12.5 × 4，再用 100 減去總價。",
-          exp: "正確！12.5 × 4 = 50 元，100 - 50 = 50 元。"
+          hint: "提示：先算 4 盒的總花費 $12.5 \\times 4$，再用 $\$100$ 減去總價。",
+          exp: "正確！4 盒餅乾共需 $12.5 \\times 4 = 50$ 元。應找回 $100 - 50 = 50$ 元。"
         },
         {
-          q: "計算：$7.2 \\times 1.5 - 3.6 \\div 0.6$ =",
-          options: ["4.8", "6.2", "7.2", "10.2"],
+          q: "計算混合運算：$7.2 \\times 1.5 - 3.6 \\div 0.6$ =",
+          options: ["$4.8$", "$6.2$", "$7.2$", "$10.2$"],
           correct: 0,
-          hint: "提示：先乘除後加減。7.2 × 1.5 = 10.8，3.6 ÷ 0.6 = 6。",
-          exp: "正確！10.8 - 6 = 4.8。"
+          hint: "提示：四則混合計算規則為「先乘除，後加減」。先算 $7.2 \\times 1.5$ 和 $3.6 \\div 0.6$。",
+          exp: "正確！$7.2 \\times 1.5 = 10.8$，$3.6 \\div 0.6 = 6$。相減得到 $10.8 - 6 = 4.8$。"
         }
       ],
       conversion: [
         {
-          q: "把分數 $\\frac{3}{8}$ 化為百分數是多少？",
-          options: ["37.5%", "38%", "32.5%", "35%"],
+          q: "把分數 $\\frac{3}{8}$ 化為百分數，結果是多少？",
+          options: ["$37.5\\%$", "$38\\%$", "$32.5\\%$", "$35\\%$"],
           correct: 0,
-          hint: "提示：1/8 = 12.5%，那麼 3 個 1/8 是多少？",
-          exp: "正確！3 ÷ 8 = 0.375 = 37.5%。"
+          hint: "提示：已知 $\\frac{1}{8} = 12.5\\%$，那麼 $3$ 個 $\\frac{1}{8}$ 是多少？也可以計算 $3 \\div 8 \\times 100\\%$。",
+          exp: "正確！$3 \\div 8 = 0.375 = 37.5\\%$。"
         },
         {
-          q: "一件外套原價 400 元，現以八折出售，現售價是多少？",
-          options: ["320 元", "340 元", "360 元", "80 元"],
+          q: "一件外套原價 $\$400$，現按「八折」優惠出售，現售價是多少？",
+          options: ["$\$320$", "$\$340$", "$\$360$", "$\$80$"],
           correct: 0,
-          hint: "提示：八折即是原價的 80% 或 0.8 倍。",
-          exp: "正確！400 × 80% = 320 元。"
+          hint: "提示：八折即原價的 $80\\%$（或 $0.8$）。售價 $=$ 原價 $\\times$ 折扣。",
+          exp: "正確！現售價 $= 400 \\times 80\\% = 400 \\times 0.8 = 320$ 元。"
         },
         {
-          q: "把 0.04 化為最簡分數是？",
-          options: ["1/4", "1/20", "1/25", "4/25"],
+          q: "將小數 $0.04$ 化為最簡分數：",
+          options: ["$\\frac{1}{4}$", "$\\frac{1}{20}$", "$\\frac{1}{25}$", "$\\frac{4}{25}$"],
           correct: 2,
-          hint: "提示：0.04 = 4/100，上下同除以最大公因數 4。",
-          exp: "正確！4/100 = 1/25。"
+          hint: "提示：$0.04 = \\frac{4}{100}$，分子和分母同除以最大公因數 $4$ 進行約分。",
+          exp: "正確！$0.04 = \\frac{4}{100} = \\frac{4 \\div 4}{100 \\div 4} = \\frac{1}{25}$。"
         }
       ],
       average: [
         {
-          q: "小明前四次常識測驗得分分別為 80、85、90、85 分，他的平均分是多少？",
-          options: ["82.5 分", "85 分", "87.5 分", "88 分"],
+          q: "小明前四次常識測驗得分分別為 $80$ 分、$85$ 分、$90$ 分和 $85$ 分，他的平均分是多少？",
+          options: ["$82.5$ 分", "$85$ 分", "$87.5$ 分", "$88$ 分"],
           correct: 1,
-          hint: "提示：將四次分數相加除以 4。",
-          exp: "正確！總分 (80+85+90+85) = 340，340 ÷ 4 = 85 分。"
+          hint: "提示：平均數公式 $=$ 總得分 $\\div$ 次數。即 $(80 + 85 + 90 + 85) \\div 4$。",
+          exp: "正確！總分 $= 80 + 85 + 90 + 85 = 340$ 分，平均分 $= 340 \\div 4 = 85$ 分。"
         },
         {
-          q: "五個數字的平均數是 14。若加入數字 20，這六個數字的平均數是多少？",
-          options: ["14", "15", "16", "17"],
+          q: "五個數的平均數是 $14$。若加入一個新數 $20$，這六個數的平均數是多少？",
+          options: ["$14$", "$15$", "$16$", "$17$"],
           correct: 1,
-          hint: "提示：原總和為 14 × 5 = 70，新總和為 70 + 20 = 90，再除以 6。",
-          exp: "正確！新總和 90 ÷ 6 = 15。"
+          hint: "提示：原總和 $= 14 \\times 5 = 70$。新總和 $= 70 + 20 = 90$，新項數為 $6$。",
+          exp: "正確！新總和 $= 70 + 20 = 90$。新平均數 $= 90 \\div 6 = 15$。"
         }
       ],
       circle: [
         {
-          q: "一個圓形花園的直徑是 14 米，它的周界是多少米？（取 $\\pi = \\frac{22}{7}$）",
-          options: ["22 米", "44 米", "88 米", "154 米"],
+          q: "一個圓形花圃的直徑為 $14\\text{ m}$，它的周界是多少米？（取 $\\pi = \\frac{22}{7}$）",
+          options: ["$22\\text{ m}$", "$44\\text{ m}$", "$88\\text{ m}$", "$154\\text{ m}$"],
           correct: 1,
-          hint: "提示：圓周公式 $C = \\pi \\times d$。",
-          exp: "正確！14 × 22/7 = 44 米。"
+          hint: "提示：圓周公式 $C = \\pi \\times d$。直接代入 $14 \\times \\frac{22}{7}$。",
+          exp: "正確！$C = 14 \\times \\frac{22}{7} = 2 \\times 22 = 44\\text{ m}$。"
         },
         {
-          q: "半徑為 5 cm 的圓形，若 $\\pi \\approx 3.14$，其圓周長度是多少？",
-          options: ["15.7 cm", "31.4 cm", "62.8 cm", "78.5 cm"],
+          q: "一個半徑為 $5\\text{ cm}$ 的圓，若取 $\\pi \\approx 3.14$，其圓周是多少？",
+          options: ["$15.7\\text{ cm}$", "$31.4\\text{ cm}$", "$62.8\\text{ cm}$", "$78.5\\text{ cm}$"],
           correct: 1,
-          hint: "提示：直徑為 5 × 2 = 10 cm，圓周 = 直徑 × 3.14。",
-          exp: "正確！10 × 3.14 = 31.4 cm。"
+          hint: "提示：直徑 $d = 2 \\times r = 10\\text{ cm}$。圓周 $C = \\pi \\times d = 3.14 \\times 10$。",
+          exp: "正確！$C = 2 \\times 3.14 \\times 5 = 31.4\\text{ cm}$。"
         }
       ],
       speed: [
         {
-          q: "一輛火車以每小時 90 公里的速度行駛，30 分鐘可行駛多少公里？",
-          options: ["45 公里", "30 公里", "60 公里", "180 公里"],
+          q: "一輛快車以每小時 $90\\text{ km}$ 的速率行駛，行駛了 $30$ 分鐘，共走了多少公里？",
+          options: ["$45\\text{ km}$", "$30\\text{ km}$", "$60\\text{ km}$", "$180\\text{ km}$"],
           correct: 0,
-          hint: "提示：30 分鐘等於 0.5 小時。距離 = 速率 × 時間。",
-          exp: "正確！90 × 0.5 = 45 公里。"
+          hint: "提示：注意單位換算！$30$ 分鐘等於 $0.5$ 小時。距離 $=$ 速率 $\\times$ 時間。",
+          exp: "正確！距離 $= 90\\text{ km/h} \\times 0.5\\text{ h} = 45\\text{ km}$。"
         },
         {
-          q: "小跑選手以 6 m/s 的速率跑了 120 米，他用了多少秒？",
-          options: ["15 秒", "20 秒", "24 秒", "720 秒"],
+          q: "跑手以 $6\\text{ m/s}$ 的速率跑了 $120\\text{ m}$，他用了多少秒？",
+          options: ["$15$ 秒", "$20$ 秒", "$24$ 秒", "$720$ 秒"],
           correct: 1,
-          hint: "提示：時間 = 距離 ÷ 速率。",
-          exp: "正確！120 ÷ 6 = 20 秒。"
+          hint: "提示：時間 $=$ 距離 $\\div$ 速率。即 $120 \\div 6$。",
+          exp: "正確！時間 $= 120 \\div 6 = 20$ 秒。"
         }
       ],
       equation: [
         {
-          q: "解方程：$3x + 7 = 25$，未知數 $x$ 的值是多少？",
-          options: ["4", "6", "8", "10"],
+          q: "解方程：$3x + 7 = 25$。求未知數 $x$ 的值：",
+          options: ["$4$", "$6$", "$8$", "$10$"],
           correct: 1,
-          hint: "提示：兩邊先減 7 得到 3x = 18，再兩邊除以 3。",
-          exp: "正確！3x = 18，故 x = 6。"
+          hint: "提示：天平兩邊同時減去 $7$，得 $3x = 18$；再兩邊同除以 $3$。",
+          exp: "正確！$3x = 25 - 7 = 18$，兩邊除以 3 得 $x = 6$。"
         },
         {
-          q: "某數的 4 倍減去 5 等於 19。若設某數為 $y$，下列哪道方程正確？",
-          options: ["4y + 5 = 19", "4y - 5 = 19", "4(y - 5) = 19", "y/4 - 5 = 19"],
+          q: "某數的 $4$ 倍減去 $5$ 等於 $19$。若設某數為 $y$，下列哪道方程正確？",
+          options: ["$4y + 5 = 19$", "$4y - 5 = 19$", "$4(y - 5) = 19$", "$\\frac{y}{4} - 5 = 19$"],
           correct: 1,
-          hint: "提示：某數的 4 倍是 4y，減去 5 寫作 4y - 5。",
-          exp: "正確！列式為 4y - 5 = 19。"
+          hint: "提示：某數的 4 倍寫作 $4y$，「減去 5」寫作 $- 5$。",
+          exp: "正確！正確方程為 $4y - 5 = 19$。"
         }
       ]
     };
 
+    const UNIT_KEYS = ["decimal", "conversion", "average", "circle", "speed", "equation"];
     const UNIT_NAMES = {
       decimal: "小數四則運算",
       conversion: "百分數互化",
@@ -693,82 +633,232 @@
       equation: "簡易方程與應用"
     };
 
-    // 狀態管理
+    // 狀態管理：目前角色 (teacher 或 student)
+    let currentRole = "teacher";
+    let linksConfig = {};
+
+    // 答題遊戲狀態
     let currentTopic = null;
     let currentQIndex = 0;
     let answered = false;
 
-    // 本機紀錄管理
-    function getStats() {
-      const stored = localStorage.getItem("6b_math_stats");
-      if (stored) {
-        try { return JSON.parse(stored); } catch (e) {}
-      }
-      return { totalCorrect: 0, currentStreak: 0, maxStreak: 0 };
-    }
-
-    function saveStats(stats) {
-      localStorage.setItem("6b_math_stats", JSON.stringify(stats));
-    }
-
-    // 啟動與自訂網址
-    function setStatus(topic, message, color) {
-      const status = document.getElementById(topic + "-status");
-      if (status) {
-        status.textContent = message;
-        status.style.color = color;
+    // KaTeX 渲染輔助函式
+    function renderMath(element) {
+      if (window.renderMathInElement && element) {
+        renderMathInElement(element, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false
+        });
       }
     }
 
-    function normaliseUrl(value) {
+    // 讀取 URL 參數與本地儲存
+    function initApp() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isStudentQuery = urlParams.get("role") === "student" || urlParams.has("data");
+
+      // 載入儲存的連結
+      UNIT_KEYS.forEach(key => {
+        // 優先讀取 URL 帶入的參數
+        const paramVal = urlParams.get("u_" + key);
+        if (paramVal) {
+          linksConfig[key] = decodeURIComponent(paramVal);
+        } else {
+          // 否則讀取本地儲存
+          const localVal = localStorage.getItem("6b_link_" + key);
+          if (localVal) linksConfig[key] = localVal;
+        }
+      });
+
+      // 如果網址帶有學生標記，直接進入學生模式
+      if (isStudentQuery) {
+        currentRole = "student";
+      } else {
+        currentRole = "teacher";
+      }
+
+      applyRoleUI();
+      renderAllCards();
+      renderMath(document.body);
+    }
+
+    function applyRoleUI() {
+      const roleBadge = document.getElementById("role-badge");
+      const teacherGuide = document.getElementById("teacher-guide");
+      const studentBanner = document.getElementById("student-banner");
+      const toggleText = document.getElementById("toggle-mode-text");
+      const shareBtn = document.getElementById("btn-share-student");
+
+      if (currentRole === "student") {
+        roleBadge.textContent = "學生挑戰模式";
+        roleBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-black border border-[#132442] bg-[#43aa8b] text-white";
+        teacherGuide.classList.add("hidden");
+        studentBanner.classList.remove("hidden");
+        toggleText.textContent = "切換回老師設定";
+        shareBtn.classList.add("hidden");
+      } else {
+        roleBadge.textContent = "老師設定模式";
+        roleBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-black border border-[#132442] bg-[#ffd166] text-[#132442]";
+        teacherGuide.classList.remove("hidden");
+        studentBanner.classList.add("hidden");
+        toggleText.textContent = "預覽學生畫面";
+        shareBtn.classList.remove("hidden");
+      }
+    }
+
+    function toggleMode() {
+      currentRole = (currentRole === "teacher") ? "student" : "teacher";
+      applyRoleUI();
+      renderAllCards();
+      lucide.createIcons();
+    }
+
+    // 渲染每個單元的遊戲區塊（老師看到輸入欄，學生看到直覺大按鈕）
+    function renderAllCards() {
+      UNIT_KEYS.forEach(key => {
+        const container = document.getElementById("box-" + key);
+        if (!container) return;
+
+        const currentUrl = linksConfig[key] || "";
+
+        if (currentRole === "student") {
+          // 學生視角：乾淨清晰，直接進入遊戲
+          if (currentUrl) {
+            container.innerHTML = `
+              <div class="space-y-2">
+                <a href="${escapeHtml(currentUrl)}" target="_blank" rel="noopener noreferrer" 
+                   class="w-full btn-brutal btn-mint py-2.5 text-xs sm:text-sm text-center block">
+                  <i data-lucide="gamepad-2" class="w-4 h-4 inline-block -mt-0.5"></i>
+                  <span>進入老師指派遊戲關卡</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 inline-block ml-1 opacity-80"></i>
+                </a>
+                <p class="text-[11px] text-center text-[#43aa8b] font-bold m-0">✓ 老師已指派線上任務</p>
+              </div>
+            `;
+          } else {
+            container.innerHTML = `
+              <div class="p-2.5 rounded-xl bg-gray-50 border border-gray-200 text-center">
+                <p class="text-xs text-gray-500 font-bold m-0">本單元老師尚未指派外部連結</p>
+                <p class="text-[11px] text-[#164a84] mt-1 m-0">同學可點擊上方按鈕挑戰內建模擬題！</p>
+              </div>
+            `;
+          }
+        } else {
+          // 老師視角：方便輸入、儲存與快速測試
+          container.innerHTML = `
+            <div class="bg-[#fdfaf2] p-3 rounded-2xl border-2 border-dashed border-[#132442]/30">
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="text-xs font-black text-[#132442]" for="url-input-${key}">
+                  老師指派遊戲網址：
+                </label>
+                ${currentUrl ? '<span class="text-[11px] font-bold text-[#43aa8b]">● 已設定</span>' : '<span class="text-[11px] font-bold text-gray-400">尚未設定</span>'}
+              </div>
+              <input id="url-input-${key}" class="w-full text-xs p-2 rounded-lg border-2 border-[#132442] bg-white outline-none focus:border-[#f46d43]" 
+                     type="url" placeholder="貼上 Wordwall / Quizizz 等網址" 
+                     value="${escapeHtml(currentUrl)}" 
+                     onchange="updateLink('${key}', this.value)" />
+              <div class="mt-2.5 flex items-center justify-between gap-2">
+                <button onclick="testTeacherLink('${key}')" class="btn-brutal btn-navy px-3 py-1 text-xs font-bold">
+                  <i data-lucide="external-link" class="w-3 h-3"></i> 測試開啟
+                </button>
+                <button onclick="clearTeacherLink('${key}')" class="text-xs font-bold text-gray-500 hover:text-red-600 underline">
+                  清除
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function escapeHtml(text) {
+      if (!text) return "";
+      return text.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function updateLink(key, value) {
       const trimmed = value.trim();
-      if (!trimmed) return null;
-      const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : "https://" + trimmed;
-      try {
-        const parsed = new URL(withProtocol);
-        return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : null;
-      } catch (error) {
-        return null;
+      if (trimmed) {
+        linksConfig[key] = trimmed;
+        localStorage.setItem("6b_link_" + key, trimmed);
+      } else {
+        delete linksConfig[key];
+        localStorage.removeItem("6b_link_" + key);
       }
+      renderAllCards();
     }
 
-    function launchGame(topic) {
-      const input = document.getElementById(topic + "-url");
-      const url = normaliseUrl(input.value);
+    function clearTeacherLink(key) {
+      delete linksConfig[key];
+      localStorage.removeItem("6b_link_" + key);
+      renderAllCards();
+    }
 
-      if (!input.value.trim()) {
-        setStatus(topic, "請先貼上遊戲或練習網址。", "#f46d43");
-        input.focus();
-        return;
-      }
-
+    function testTeacherLink(key) {
+      const url = linksConfig[key];
       if (!url) {
-        setStatus(topic, "請輸入有效網址（如 https://...）", "#f46d43");
-        input.focus();
+        showToast("提示", "請先輸入或貼上有效的遊戲網址喔！", "info");
         return;
       }
-
-      // 儲存到 localStorage 方便學生下次使用
-      localStorage.setItem("6b_saved_url_" + topic, url);
-      window.open(url, "_blank", "noopener,noreferrer");
-      setStatus(topic, "✓ 已在分頁開啟並為你儲存連結！", "#43aa8b");
+      const target = /^https?:\/\//i.test(url) ? url : "https://" + url;
+      window.open(target, "_blank", "noopener,noreferrer");
     }
 
-    function clearGame(topic) {
-      const input = document.getElementById(topic + "-url");
-      input.value = "";
-      localStorage.removeItem("6b_saved_url_" + topic);
-      setStatus(topic, "連結已重設。", "#164a84");
-      input.focus();
+    // 核心功能：產生包含所有網址的學生專屬連結
+    function generateAndCopyShareLink() {
+      // 構建帶有所有已填寫連結與 role=student 的完整網址
+      const currentOrigin = window.location.origin + window.location.pathname;
+      const params = new URLSearchParams();
+      params.set("role", "student");
+
+      let hasLink = false;
+      UNIT_KEYS.forEach(key => {
+        if (linksConfig[key]) {
+          params.set("u_" + key, linksConfig[key]);
+          hasLink = true;
+        }
+      });
+
+      const fullShareUrl = currentOrigin + "?" + params.toString();
+
+      // 複製到剪貼簿 (相容 iFrame 與各種瀏覽器環境)
+      let copied = false;
+      const tempInput = document.createElement("textarea");
+      tempInput.value = fullShareUrl;
+      tempInput.style.position = "fixed";
+      tempInput.style.left = "-9999px";
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        copied = document.execCommand("copy");
+      } catch (err) {
+        copied = false;
+      }
+      document.body.removeChild(tempInput);
+
+      if (copied) {
+        showToast(
+          "學生專用連結已複製！",
+          hasLink 
+            ? "已將所有設定好的遊戲打包完成！直接將此連結發送至班級群組、Google Classroom 或電子白板，學生開啟後即是乾淨的遊戲介面。"
+            : "注意：目前尚未輸入任何遊戲網址，學生將主要進行內建模擬題庫練習。隨時填入網址後重新複製即可！",
+          "success"
+        );
+      } else {
+        showToast("產生成功", "請手動複製下列連結分享給學生：<br><input class='w-full mt-2 p-2 border border-gray-300 rounded text-xs' readonly value='" + escapeHtml(fullShareUrl) + "'>", "info");
+      }
     }
 
-    // 內建模擬小遊戲邏輯
     function startBuiltInGame(topic) {
       currentTopic = topic;
       currentQIndex = 0;
       answered = false;
 
-      document.getElementById("game-category-tag").textContent = UNIT_NAMES[topic] || "數學挑戰";
+      document.getElementById("game-category-tag").textContent = UNIT_NAMES[topic] || "數學特訓";
       renderQuestion();
       document.getElementById("game-modal").classList.remove("hidden");
       lucide.createIcons();
@@ -781,7 +871,6 @@
     function renderQuestion() {
       const questions = UNIT_QUESTIONS[currentTopic];
       if (!questions || currentQIndex >= questions.length) {
-        // 完成單元
         renderComplete();
         return;
       }
@@ -789,13 +878,15 @@
       answered = false;
       const q = questions[currentQIndex];
 
-      document.getElementById("game-progress").textContent = `題目 ${currentQIndex + 1} / ${questions.length}`;
-      document.getElementById("game-question").textContent = q.q;
+      document.getElementById("game-progress").textContent = `第 ${currentQIndex + 1} 題 / 共 ${questions.length} 題`;
+      
+      const qEl = document.getElementById("game-question");
+      qEl.innerHTML = q.q;
 
       // 提示
       const hintEl = document.getElementById("game-hint");
       if (q.hint) {
-        hintEl.textContent = q.hint;
+        hintEl.innerHTML = q.hint;
         hintEl.classList.remove("hidden");
       } else {
         hintEl.classList.add("hidden");
@@ -805,17 +896,27 @@
       const feedbackEl = document.getElementById("game-feedback");
       feedbackEl.classList.add("hidden");
 
-      // 渲染選項
+      // 渲染選項按鈕
       const optContainer = document.getElementById("game-options");
       optContainer.innerHTML = "";
 
       q.options.forEach((optText, idx) => {
         const btn = document.createElement("button");
-        btn.className = "w-full text-left p-4 rounded-2xl border-2 border-[#132442] bg-white font-bold text-sm md:text-base hover:bg-[#ffd166]/20 transition-all flex items-center justify-between";
-        btn.innerHTML = `<span><strong class="mr-2.5 text-[#164a84]">${String.fromCharCode(65 + idx)}.</strong> ${optText}</span>`;
+        btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-[#132442] bg-white font-bold text-sm md:text-base hover:bg-[#ffd166]/25 transition-all flex items-center justify-between";
+        btn.innerHTML = `
+          <span>
+            <strong class="mr-2 text-[#164a84] font-black">${String.fromCharCode(65 + idx)}.</strong>
+            <span>${optText}</span>
+          </span>
+        `;
         btn.onclick = () => selectOption(idx, btn);
         optContainer.appendChild(btn);
       });
+
+      // 渲染題目與選項中的數學符號
+      renderMath(qEl);
+      renderMath(hintEl);
+      renderMath(optContainer);
     }
 
     function selectOption(selectedIdx, btnElement) {
@@ -832,7 +933,7 @@
 
       feedbackEl.classList.remove("hidden");
 
-      // 選項上色
+      // 選項高亮
       const allButtons = document.getElementById("game-options").children;
       for (let i = 0; i < allButtons.length; i++) {
         if (i === q.correct) {
@@ -849,15 +950,20 @@
           stats.maxStreak = stats.currentStreak;
         }
         feedbackEl.className = "mt-4 p-4 rounded-2xl border-2 border-[#43aa8b] bg-[#eafaf4] text-[#132442]";
-        feedbackText.innerHTML = `🎉 <strong>答對了！</strong> ${q.exp}`;
+        feedbackText.innerHTML = `🎉 <strong>回答完全正確！</strong><div class="mt-1.5 text-xs text-gray-700 leading-relaxed">${q.exp}</div>`;
       } else {
         stats.currentStreak = 0;
         feedbackEl.className = "mt-4 p-4 rounded-2xl border-2 border-[#f46d43] bg-[#fff3f0] text-[#132442]";
-        feedbackText.innerHTML = `❌ <strong>差一點點！</strong> 正確答案是 (${String.fromCharCode(65 + q.correct)})。<br><span class="text-xs text-gray-700">${q.exp}</span>`;
+        feedbackText.innerHTML = `❌ <strong>再接再厲！</strong> 正確答案是 <strong>(${String.fromCharCode(65 + q.correct)})</strong>。<div class="mt-1.5 text-xs text-gray-700 leading-relaxed">${q.exp}</div>`;
       }
 
+      renderMath(feedbackText);
       saveStats(stats);
-      nextBtn.textContent = (currentQIndex + 1 < UNIT_QUESTIONS[currentTopic].length) ? "下一題" : "查看單元成果";
+
+      const isLast = currentQIndex + 1 >= UNIT_QUESTIONS[currentTopic].length;
+      nextBtn.innerHTML = isLast 
+        ? `<span>查看挑戰總結</span> <i data-lucide="check" class="w-3.5 h-3.5"></i>`
+        : `<span>下一題</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>`;
       lucide.createIcons();
     }
 
@@ -867,21 +973,25 @@
     }
 
     function renderComplete() {
-      document.getElementById("game-question").textContent = "🏆 太棒了！單元挑戰全部完成！";
+      const qEl = document.getElementById("game-question");
+      qEl.innerHTML = "🏆 精彩通關！本單元模擬題全數完成！";
       document.getElementById("game-hint").classList.add("hidden");
       document.getElementById("game-feedback").classList.add("hidden");
 
       const optContainer = document.getElementById("game-options");
       optContainer.innerHTML = `
         <div class="text-center py-6">
-          <p class="text-sm font-medium text-[#164a84] mb-5">
-            你已經完成這個單元的所有練習，數學敏銳度又提升了一步！
+          <div class="w-14 h-14 bg-[#ffd166] text-[#132442] rounded-2xl border-2 border-[#132442] flex items-center justify-center mx-auto mb-3 shadow-[3px_3px_0_#132442]">
+            <i data-lucide="medal" class="w-8 h-8"></i>
+          </div>
+          <p class="text-xs sm:text-sm font-medium text-[#164a84] mb-5">
+            太棒了！已將所學概念融會貫通。你可以再做一次加深記憶，或返回單元選單挑戰其他主題。
           </p>
           <div class="flex items-center justify-center gap-3">
-            <button onclick="startBuiltInGame('${currentTopic}')" class="btn-brutal btn-orange px-5 py-2.5 text-sm">
+            <button onclick="startBuiltInGame('${currentTopic}')" class="btn-brutal btn-orange px-4 py-2 text-xs sm:text-sm">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 再練一次
             </button>
-            <button onclick="closeGameModal()" class="btn-brutal btn-navy px-5 py-2.5 text-sm">
+            <button onclick="closeGameModal()" class="btn-brutal btn-navy px-4 py-2 text-xs sm:text-sm">
               <i data-lucide="check" class="w-4 h-4"></i> 回到單元選單
             </button>
           </div>
@@ -890,7 +1000,19 @@
       lucide.createIcons();
     }
 
-    // 戰報視窗
+    // 答題戰績管理
+    function getStats() {
+      const stored = localStorage.getItem("6b_math_stats");
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return { totalCorrect: 0, currentStreak: 0, maxStreak: 0 };
+    }
+
+    function saveStats(stats) {
+      localStorage.setItem("6b_math_stats", JSON.stringify(stats));
+    }
+
     function openStatsModal() {
       const stats = getStats();
       document.getElementById("stat-total-correct").textContent = stats.totalCorrect;
@@ -903,23 +1025,65 @@
       document.getElementById("stats-modal").classList.add("hidden");
     }
 
-    function resetStats() {
-      if (confirm("確定要重設答題紀錄嗎？")) {
-        localStorage.removeItem("6b_math_stats");
-        openStatsModal();
+    // 自訂對話框 (無 alert / confirm)
+    function showToast(title, message, type = "success") {
+      const modal = document.getElementById("toast-modal");
+      const titleEl = document.getElementById("toast-title");
+      const msgEl = document.getElementById("toast-message");
+      const iconContainer = document.getElementById("toast-icon-container");
+      const actionsEl = document.getElementById("toast-actions");
+
+      titleEl.textContent = title;
+      msgEl.innerHTML = message;
+
+      if (type === "success") {
+        iconContainer.className = "w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center bg-green-100 text-[#43aa8b]";
+        iconContainer.innerHTML = '<i data-lucide="check-circle" class="w-7 h-7"></i>';
+      } else {
+        iconContainer.className = "w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center bg-blue-100 text-[#164a84]";
+        iconContainer.innerHTML = '<i data-lucide="info" class="w-7 h-7"></i>';
       }
+
+      actionsEl.innerHTML = `<button onclick="closeToast()" class="btn-brutal btn-navy px-5 py-2 text-xs font-black">確定</button>`;
+
+      modal.classList.remove("hidden");
+      lucide.createIcons();
     }
 
-    // 頁面載入時回復已儲存的自訂網址
-    document.addEventListener("DOMContentLoaded", function () {
-      ["decimal", "conversion", "average", "circle", "speed", "equation"].forEach(topic => {
-        const saved = localStorage.getItem("6b_saved_url_" + topic);
-        if (saved) {
-          const input = document.getElementById(topic + "-url");
-          if (input) input.value = saved;
-        }
-      });
+    function showConfirmResetModal() {
+      const modal = document.getElementById("toast-modal");
+      const titleEl = document.getElementById("toast-title");
+      const msgEl = document.getElementById("toast-message");
+      const iconContainer = document.getElementById("toast-icon-container");
+      const actionsEl = document.getElementById("toast-actions");
+
+      titleEl.textContent = "確定要重設記錄嗎？";
+      msgEl.textContent = "重設後，答對題數與連續答對記錄將歸零。";
+      iconContainer.className = "w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center bg-amber-100 text-[#f46d43]";
+      iconContainer.innerHTML = '<i data-lucide="alert-triangle" class="w-7 h-7"></i>';
+
+      actionsEl.innerHTML = `
+        <button onclick="confirmReset()" class="btn-brutal btn-orange px-4 py-2 text-xs font-black">確認歸零</button>
+        <button onclick="closeToast()" class="btn-brutal bg-white px-4 py-2 text-xs font-bold">取消</button>
+      `;
+
+      modal.classList.remove("hidden");
       lucide.createIcons();
+    }
+
+    function confirmReset() {
+      localStorage.removeItem("6b_math_stats");
+      closeToast();
+      openStatsModal();
+    }
+
+    function closeToast() {
+      document.getElementById("toast-modal").classList.add("hidden");
+    }
+
+    // 啟動入口
+    window.addEventListener("DOMContentLoaded", () => {
+      initApp();
     });
   </script>
 </body>
