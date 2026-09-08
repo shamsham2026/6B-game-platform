@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
- <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"C","B":"20260908-03-aa41c79","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/9e99ecf74af2a081.telemetry_sdk.js" integrity="sha512-tZ7fmfTx2KpCLjXQnEuL9azQ4A5+7+xumsx6r/WYVD0zCP/8LP8hDeCypMQesmP+WyAew4g7l5Ah23Bjd6yoVg=="></script>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6B班數學遊戲平台</title>
+  <title>6B班數學遊戲互動平台</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --ink: #132442;
@@ -15,15 +18,16 @@
       --orange: #f46d43;
       --yellow: #ffd166;
       --mint: #43aa8b;
+      --card-bg: #ffffff;
     }
 
     * { box-sizing: border-box; }
 
     body {
       width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      min-height: 100vh;
       margin: 0;
-      font-family: "DM Sans", sans-serif;
+      font-family: "DM Sans", "Noto Sans TC", sans-serif;
       color: var(--ink);
       background-color: var(--cream);
       background-image:
@@ -32,48 +36,42 @@
       background-size: 28px 28px;
     }
 
-    .app-shell {
-      width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
-      overflow-x: hidden;
-    }
-
     .topbar {
-      background: rgba(255, 250, 240, .9);
-      border-bottom: 1px solid rgba(19, 36, 66, .12);
+      background: rgba(255, 250, 240, .92);
+      border-bottom: 2px solid rgba(19, 36, 66, .12);
       backdrop-filter: blur(12px);
     }
 
     .brand-mark {
       display: grid;
-      width: 43px;
-      height: 43px;
+      width: 44px;
+      height: 44px;
       place-items: center;
       color: #fff;
       background: var(--navy);
       border-radius: 14px;
-      box-shadow: 4px 4px 0 var(--yellow);
+      box-shadow: 3px 3px 0 var(--yellow);
     }
 
     .hero-orbit {
       position: absolute;
-      top: -96px;
-      right: -48px;
+      top: -80px;
+      right: -40px;
       width: 220px;
       height: 220px;
       pointer-events: none;
-      border: 30px solid rgba(255, 209, 102, .42);
+      border: 28px solid rgba(255, 209, 102, .45);
       border-radius: 50%;
     }
 
     .hero-dots {
       position: absolute;
-      right: 55px;
-      bottom: 28px;
-      width: 90px;
-      height: 54px;
-      opacity: .6;
-      background-image: radial-gradient(#ffffff 2px, transparent 2px);
+      right: 40px;
+      bottom: 20px;
+      width: 96px;
+      height: 56px;
+      opacity: .55;
+      background-image: radial-gradient(var(--ink) 2px, transparent 2px);
       background-size: 14px 14px;
     }
 
@@ -81,259 +79,651 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: 445px;
-      overflow: hidden;
+      background: var(--card-bg);
       border: 2px solid var(--ink);
       border-radius: 26px;
-      box-shadow: 7px 7px 0 rgba(19, 36, 66, .92);
-      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 6px 6px 0 var(--ink);
+      transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .topic-card:hover {
       transform: translate(-3px, -4px);
-      box-shadow: 11px 11px 0 rgba(19, 36, 66, .92);
+      box-shadow: 10px 10px 0 var(--ink);
     }
 
     .topic-icon {
       display: grid;
-      width: 62px;
-      height: 62px;
+      width: 58px;
+      height: 58px;
       place-items: center;
-      background: rgba(255, 255, 255, .75);
+      background: rgba(255, 255, 255, .9);
       border: 2px solid var(--ink);
-      border-radius: 19px;
+      border-radius: 18px;
+      box-shadow: 2px 2px 0 var(--ink);
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
-      border: 1px solid rgba(19, 36, 66, .22);
+      border: 1.5px solid var(--ink);
       border-radius: 999px;
-      padding: .35rem .72rem;
+      padding: .25rem .75rem;
       font-size: .78rem;
-      font-weight: 700;
-      background: rgba(255, 255, 255, .62);
+      font-weight: 800;
+      background: var(--yellow);
     }
 
     .game-frame {
       margin-top: auto;
-      padding: 1rem;
-      background: rgba(255, 255, 255, .72);
-      border: 2px dashed rgba(19, 36, 66, .55);
-      border-radius: 18px;
+      padding: 1.1rem;
+      background: #fdfaf2;
+      border: 2px dashed rgba(19, 36, 66, .4);
+      border-radius: 20px;
     }
 
     .url-input {
       width: 100%;
       min-width: 0;
-      padding: .72rem .85rem;
+      padding: .65rem .85rem;
+      font-size: .88rem;
       color: var(--ink);
-      background: rgba(255, 255, 255, .94);
+      background: #ffffff;
       border: 2px solid var(--ink);
       border-radius: 12px;
       outline: none;
+      transition: border-color .15s ease;
     }
 
-    .url-input::placeholder { color: #64748b; }
-
-    .launch-button,
-    .clear-button {
-      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    .url-input:focus {
+      border-color: var(--orange);
     }
 
-    .launch-button:hover,
-    .clear-button:hover {
-      transform: translateY(-2px);
-    }
-
-    .launch-button {
-      color: #fff;
-      background: var(--navy);
+    .btn-brutal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-weight: 800;
       border: 2px solid var(--ink);
       border-radius: 12px;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .btn-brutal:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink) !important;
+    }
+
+    .btn-navy {
+      color: #fff;
+      background: var(--navy);
       box-shadow: 3px 3px 0 var(--ink);
     }
 
-    .clear-button {
+    .btn-navy:hover {
+      background: #1e5ba1;
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .btn-orange {
+      color: #fff;
+      background: var(--orange);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .btn-orange:hover {
+      background: #ff7b52;
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .btn-clear {
       color: var(--ink);
       background: transparent;
-      border-bottom: 1px solid rgba(19, 36, 66, .5);
-    }
-
-    .frame-status {
-      min-height: 1.25rem;
-      margin: .6rem 0 0;
-      font-size: .78rem;
+      border: none;
+      border-bottom: 1.5px solid rgba(19, 36, 66, .45);
+      border-radius: 0;
+      cursor: pointer;
       font-weight: 700;
+      padding: 2px 4px;
     }
 
-    button:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--orange);
-      outline-offset: 3px;
+    .btn-clear:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
     }
 
-    .reveal-up { animation: revealUp .55s both; }
-
-    @keyframes revealUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
+    .modal-backdrop {
+      background: rgba(19, 36, 66, 0.7);
+      backdrop-filter: blur(4px);
     }
 
-    @media (max-width: 640px) {
-      .topic-card { min-height: auto; }
+    .modal-box {
+      border: 3px solid var(--ink);
+      box-shadow: 9px 9px 0 var(--ink);
     }
   </style>
-  <script src="/_sdk/fbe2ebfd64647c54.data_sdk.js" type="text/javascript" integrity="sha512-vkTX6CfvpHc3WbjK+tFJCaDuw4ERA4aEV/e5/7+MMJPMTF4RJYCI6CAwJBT/gtDW+dba4uLSsPUgDjVDHWtgUQ=="></script>
-  <script src="/_sdk/fcb6dc01f91829ac.resizing_sdk.js" type="text/javascript" integrity="sha512-YK8JfnN705qaEaVhiL7pcVB2Rs/BbdX5yxV55Az8zT/1JanyEWTw9HqCF915m9iV1YEaoil8qsjJz03l1Kb0Ug=="></script>
- </head>
- <body data-template-id="__page-root">
-  <div class="app-shell">
-   <header class="topbar">
-    <div class="w-full max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-     <div class="flex items-center gap-3">
-      <div class="brand-mark" aria-hidden="true">
-       <i data-lucide="sigma" width="24" height="24"></i>
+</head>
+<body>
+  <div class="min-h-screen flex flex-col">
+    <!-- 頂部導航欄 -->
+    <header class="topbar sticky top-0 z-30">
+      <div class="w-full max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="brand-mark" aria-hidden="true">
+            <i data-lucide="sigma" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="m-0 text-base sm:text-lg font-black tracking-tight text-[#132442]">6B 班數學冒險平台</p>
+            <p class="m-0 text-xs text-[#164a84] font-bold opacity-80">六年級數學核心技能遊戲基地</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:flex items-center gap-2 text-xs md:text-sm font-bold bg-white/80 border-2 border-[#132442] px-3.5 py-1.5 rounded-full shadow-[2px_2px_0_#132442]">
+            <i data-lucide="gamepad-2" class="w-4 h-4 text-[#f46d43]"></i>
+            <span>隨點即玩 · 支援自訂網址</span>
+          </div>
+          <button onclick="openStatsModal()" class="btn-brutal bg-[#ffd166] text-[#132442] px-3 py-1.5 text-xs md:text-sm shadow-[2px_2px_0_#132442]">
+            <i data-lucide="trophy" class="w-4 h-4"></i>
+            <span>得分排行</span>
+          </button>
+        </div>
       </div>
-      <div>
-       <p data-template-id="brand-name" class="canva-text m-0 font-extrabold tracking-tight"></p>
-       <p data-template-id="brand-caption" class="canva-text m-0 text-xs opacity-70"></p>
+    </header>
+
+    <!-- 主內容區 -->
+    <main class="w-full max-w-6xl mx-auto px-5 py-8 md:py-12 flex-1">
+      <!-- 頂部橫幅 (Hero) -->
+      <section class="relative overflow-hidden rounded-[28px] border-3 border-[#132442] bg-[#ffffff] px-6 py-8 md:px-10 md:py-10 shadow-[8px_8px_0_#132442]">
+        <div class="hero-orbit"></div>
+        <div class="hero-dots"></div>
+
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-[#132442] bg-[#ffd166] px-3.5 py-1 text-xs md:text-sm font-black text-[#132442] shadow-[2px_2px_0_#132442]">
+            <i data-lucide="sparkles" class="w-4 h-4 text-[#f46d43]"></i>
+            <span>2026-2027 升中特訓版</span>
+          </div>
+          <h1 class="mt-4 mb-2 text-2xl sm:text-3xl md:text-4xl font-black leading-tight text-[#132442]">
+            動腦挑戰！解鎖你的數學超能力
+          </h1>
+          <p class="max-w-xl text-sm md:text-base leading-relaxed text-[#164a84] font-medium">
+            收錄六年級 6 大關鍵數學主題。每個單元都配備了「<strong>即刻挑戰小遊戲</strong>」，同時支援老師或同學貼入自己的自訂練習連結（如 Wordwall、Quizizz、Blooket）！
+          </p>
+
+          <div class="mt-5 flex flex-wrap items-center gap-3 text-xs md:text-sm font-bold">
+            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#43aa8b]"></i> 支援離線直接遊玩
+            </span>
+            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
+              <i data-lucide="zap" class="w-4 h-4 text-[#f46d43]"></i> 即時解答與回饋
+            </span>
+            <span class="flex items-center gap-1.5 bg-[#fffaf0] border border-[#132442] px-3 py-1.5 rounded-xl">
+              <i data-lucide="bookmark" class="w-4 h-4 text-[#164a84]"></i> 網址自動儲存
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 單元清單標題列 -->
+      <div class="mt-10 mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="m-0 text-2xl font-black text-[#132442] flex items-center gap-2">
+            <i data-lucide="layout-grid" class="w-6 h-6 text-[#164a84]"></i>
+            6B 數學單元挑戰庫
+          </h2>
+          <p class="mt-1 mb-0 text-sm text-[#164a84] opacity-80 font-medium">
+            點擊「直接挑戰」進入內建互動題目，或於下方輸入老師指派的遊戲網址。
+          </p>
+        </div>
+        <div class="tag text-xs font-black shadow-[2px_2px_0_#132442]">
+          共 6 個單元已就緒
+        </div>
       </div>
-     </div>
-     <div class="hidden sm:flex items-center gap-2 text-sm font-bold text-[#164a84]">
-      <i data-lucide="gamepad-2" width="17" height="17"></i> <span data-template-id="topbar-note" class="canva-text"></span>
-     </div>
-    </div>
-   </header>
-   <main class="w-full max-w-6xl mx-auto px-5 py-9 md:py-14">
-    <section aria-labelledby="welcome-title">
-     <div data-template-id="hero-section" class="canva-banner relative overflow-hidden rounded-[30px] border-2 border-[#132442] px-6 py-10 md:px-11 md:py-12 shadow-[8px_8px_0_#132442]">
-      <div class="hero-orbit"></div>
-      <div class="hero-dots"></div>
-      <div class="relative max-w-2xl">
-       <div data-template-id="hero-label" class="canva-tag inline-flex rounded-full px-3 py-1 text-sm font-bold"></div>
-       <h1 id="welcome-title" data-template-id="hero-title" class="canva-text mt-4 mb-3 font-extrabold leading-tight"></h1>
-       <p data-template-id="hero-subtitle" class="canva-text max-w-xl leading-relaxed"></p>
+
+      <!-- 6 大主題卡片網格 -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="數學單元卡片">
+        
+        <!-- 卡片 1: 小數乘除 -->
+        <article class="topic-card p-6" id="card-decimal">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#eaf4fc]">
+              <i data-lucide="calculator" class="w-7 h-7 text-[#164a84]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元一 · 數與代數</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">小數四則與混合計算</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            掌握小數除法中的小數點對齊、補零運算，以及包含括號的四則混合應用題。
+          </p>
+          
+          <div class="my-4">
+            <button onclick="startBuiltInGame('decimal')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="decimal-url">自訂遊戲網址：</label>
+            <input id="decimal-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Wordwall)" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('decimal')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('decimal')">清除</button>
+            </div>
+            <p id="decimal-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+        <!-- 卡片 2: 分小百互化 -->
+        <article class="topic-card p-6" id="card-conversion">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#fef5e7]">
+              <i data-lucide="arrow-left-right" class="w-7 h-7 text-[#f46d43]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元二 · 百分數</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">分數、小數與百分數互化</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            熟練常見的分數、小數與百分數對應（如 1/8 = 12.5%），以及折扣與折讓計算。
+          </p>
+
+          <div class="my-4">
+            <button onclick="startBuiltInGame('conversion')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="conversion-url">自訂遊戲網址：</label>
+            <input id="conversion-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Kahoot)" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('conversion')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('conversion')">清除</button>
+            </div>
+            <p id="conversion-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+        <!-- 卡片 3: 平均數 -->
+        <article class="topic-card p-6" id="card-average">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#eef8f5]">
+              <i data-lucide="bar-chart-3" class="w-7 h-7 text-[#43aa8b]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元三 · 數據處理</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">平均數與統計分析</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            透過「總和 ÷ 項數」快速求平均，並解答加入新數據或遺漏分數的逆運算問題。
+          </p>
+
+          <div class="my-4">
+            <button onclick="startBuiltInGame('average')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="average-url">自訂遊戲網址：</label>
+            <input id="average-url" class="url-input" type="url" placeholder="貼上自訂連結" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('average')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('average')">清除</button>
+            </div>
+            <p id="average-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+        <!-- 卡片 4: 圓形與圓周 -->
+        <article class="topic-card p-6" id="card-circle">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#fcedea]">
+              <i data-lucide="circle" class="w-7 h-7 text-[#f46d43]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元四 · 度量與圖形</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">圓周率與圓周計算</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            運用 $C = 2\pi r$ 或 $C = \pi d$（取 $\pi \approx 3.14$ 或 $22/7$），計算跑道與組合圖形周界。
+          </p>
+
+          <div class="my-4">
+            <button onclick="startBuiltInGame('circle')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="circle-url">自訂遊戲網址：</label>
+            <input id="circle-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Quizlet)" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('circle')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('circle')">清除</button>
+            </div>
+            <p id="circle-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+        <!-- 卡片 5: 速率 -->
+        <article class="topic-card p-6" id="card-speed">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#eaf4fc]">
+              <i data-lucide="gauge" class="w-7 h-7 text-[#164a84]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元五 · 速率與時間</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">速率、距離與時間</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            精通「距離 = 速率 × 時間」，並搞懂 $\text{m/s}$ 與 $\text{km/h}$ 之間的單位換算。
+          </p>
+
+          <div class="my-4">
+            <button onclick="startBuiltInGame('speed')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="speed-url">自訂遊戲網址：</label>
+            <input id="speed-url" class="url-input" type="url" placeholder="貼上自訂連結 (如 Blooket)" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('speed')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('speed')">清除</button>
+            </div>
+            <p id="speed-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+        <!-- 卡片 6: 簡易方程 -->
+        <article class="topic-card p-6" id="card-equation">
+          <div class="flex items-start justify-between gap-4">
+            <div class="topic-icon bg-[#fef5e7]">
+              <i data-lucide="variable" class="w-7 h-7 text-[#f46d43]"></i>
+            </div>
+            <span class="tag bg-[#ffd166]">單元六 · 代數思維</span>
+          </div>
+          <h3 class="mt-5 mb-1.5 text-xl font-black text-[#132442]">簡易方程與應用題</h3>
+          <p class="mt-0 text-sm text-[#164a84] opacity-85 leading-relaxed">
+            利用天平平衡概念解兩步驟方程，從日常生活文字情境列式並求出未知數 $x$。
+          </p>
+
+          <div class="my-4">
+            <button onclick="startBuiltInGame('equation')" class="w-full btn-brutal btn-orange py-2.5 text-sm">
+              <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span>直接挑戰內建模擬題</span>
+            </button>
+          </div>
+
+          <div class="game-frame">
+            <label class="mb-1.5 block text-xs font-black text-[#132442]" for="equation-url">自訂遊戲網址：</label>
+            <input id="equation-url" class="url-input" type="url" placeholder="貼上自訂連結" />
+            <div class="mt-3 flex items-center justify-between gap-2">
+              <button class="btn-brutal btn-navy px-3.5 py-1.5 text-xs font-black" type="button" onclick="launchGame('equation')">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> 開啟
+              </button>
+              <button class="btn-clear text-xs" type="button" onclick="clearGame('equation')">清除</button>
+            </div>
+            <p id="equation-status" class="mt-2 text-xs font-bold min-h-[1rem]"></p>
+          </div>
+        </article>
+
+      </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="w-full max-w-6xl mx-auto px-5 py-8 text-center">
+      <div class="border-t-2 border-[#132442]/15 pt-6">
+        <p class="m-0 text-sm font-bold text-[#164a84]">
+          6B班 數學科教學資源平台 · 鼓勵自主探究與數學思維訓練
+        </p>
+        <p class="mt-1 text-xs text-[#132442] opacity-60">
+          貼心提示：自訂連結會自動儲存在這台電腦的瀏覽器中，下次打開不會遺失。
+        </p>
       </div>
-     </div>
-     <div class="mt-10 flex flex-wrap items-end justify-between gap-3">
-      <div>
-       <h2 data-template-id="library-title" class="canva-text m-0 font-extrabold"></h2>
-       <p data-template-id="library-description" class="canva-text mt-1 mb-0 opacity-75"></p>
-      </div>
-      <div data-template-id="game-count" class="canva-tag inline-flex items-center gap-2"></div>
-     </div>
-     <section class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" aria-label="數學單元遊戲連結">
-      <article data-template-id="decimal-card" class="canva-card topic-card reveal-up p-6">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="calculator" width="29" height="29"></i>
-        </div><span data-template-id="decimal-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="decimal-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="decimal-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="decimal-frame" class="canva-panel game-frame">
-        <label data-template-id="decimal-url-label" class="canva-text mb-2 block text-sm font-bold" for="decimal-url"></label> <input id="decimal-url" data-template-id="decimal-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="decimal-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('decimal')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="decimal-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('decimal')"></button>
-        </div>
-        <p id="decimal-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-      <article data-template-id="conversion-card" class="canva-card topic-card reveal-up p-6" style="animation-delay:.06s">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="arrow-left-right" width="29" height="29"></i>
-        </div><span data-template-id="conversion-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="conversion-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="conversion-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="conversion-frame" class="canva-panel game-frame">
-        <label data-template-id="conversion-url-label" class="canva-text mb-2 block text-sm font-bold" for="conversion-url"></label> <input id="conversion-url" data-template-id="conversion-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="conversion-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('conversion')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="conversion-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('conversion')"></button>
-        </div>
-        <p id="conversion-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-      <article data-template-id="average-card" class="canva-card topic-card reveal-up p-6" style="animation-delay:.12s">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="bar-chart-3" width="29" height="29"></i>
-        </div><span data-template-id="average-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="average-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="average-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="average-frame" class="canva-panel game-frame">
-        <label data-template-id="average-url-label" class="canva-text mb-2 block text-sm font-bold" for="average-url"></label> <input id="average-url" data-template-id="average-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="average-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('average')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="average-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('average')"></button>
-        </div>
-        <p id="average-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-      <article data-template-id="circle-card" class="canva-card topic-card reveal-up p-6" style="animation-delay:.18s">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="circle" width="29" height="29"></i>
-        </div><span data-template-id="circle-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="circle-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="circle-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="circle-frame" class="canva-panel game-frame">
-        <label data-template-id="circle-url-label" class="canva-text mb-2 block text-sm font-bold" for="circle-url"></label> <input id="circle-url" data-template-id="circle-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="circle-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('circle')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="circle-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('circle')"></button>
-        </div>
-        <p id="circle-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-      <article data-template-id="speed-card" class="canva-card topic-card reveal-up p-6" style="animation-delay:.24s">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="gauge" width="29" height="29"></i>
-        </div><span data-template-id="speed-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="speed-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="speed-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="speed-frame" class="canva-panel game-frame">
-        <label data-template-id="speed-url-label" class="canva-text mb-2 block text-sm font-bold" for="speed-url"></label> <input id="speed-url" data-template-id="speed-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="speed-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('speed')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="speed-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('speed')"></button>
-        </div>
-        <p id="speed-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-      <article data-template-id="equation-card" class="canva-card topic-card reveal-up p-6" style="animation-delay:.3s">
-       <div class="flex items-start justify-between gap-4">
-        <div class="topic-icon"><i data-lucide="variable" width="29" height="29"></i>
-        </div><span data-template-id="equation-level" class="canva-tag tag"></span>
-       </div>
-       <h3 data-template-id="equation-title" class="canva-text mt-6 mb-2 font-extrabold"></h3>
-       <p data-template-id="equation-description" class="canva-text mt-0 leading-relaxed"></p>
-       <div data-template-id="equation-frame" class="canva-panel game-frame">
-        <label data-template-id="equation-url-label" class="canva-text mb-2 block text-sm font-bold" for="equation-url"></label> <input id="equation-url" data-template-id="equation-url-input" class="canva-input url-input" type="url" inputmode="url">
-        <div class="mt-3 flex items-center justify-between gap-3">
-         <button data-template-id="equation-launch" class="canva-button launch-button inline-flex items-center gap-2 px-3 py-2 text-sm font-extrabold" type="button" onclick="launchGame('equation')"><i data-lucide="external-link" width="16" height="16"></i></button> <button data-template-id="equation-clear" class="canva-button clear-button px-1 py-1 text-sm font-bold" type="button" onclick="clearGame('equation')"></button>
-        </div>
-        <p id="equation-status" class="frame-status" aria-live="polite"></p>
-       </div>
-      </article>
-     </section>
-    </section>
-   </main>
-   <footer class="w-full max-w-6xl mx-auto px-5 pb-8 text-center">
-    <p data-template-id="footer-note" class="canva-text m-0 text-sm opacity-65"></p>
-   </footer>
+    </footer>
   </div>
-  <script src="/_sdk/094c7d1de2e53723.editing_sdk.js" integrity="sha512-ylSdxhK8QaeeNDMH6owJw5ACCe7G3BSACM9CKRWj6wIpl1iZ/qhef9M7EM1X2wWD2jtTxZKQFdxfq8+VWPb3Cw=="></script>
+
+  <!-- 內建互動遊戲視窗 (Modal) -->
+  <div id="game-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="modal-box bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 relative flex flex-col max-h-[90vh] overflow-y-auto">
+      
+      <!-- 關閉按鈕 -->
+      <button onclick="closeGameModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-[#132442] font-black">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- 標題資訊 -->
+      <div class="flex items-center gap-3">
+        <span id="game-category-tag" class="tag bg-[#ffd166] text-xs">小數運算</span>
+        <span id="game-progress" class="text-xs font-extrabold text-[#164a84]">題目 1 / 3</span>
+      </div>
+
+      <h3 id="game-question" class="text-xl md:text-2xl font-black text-[#132442] mt-4 mb-5 leading-snug">
+        載入中...
+      </h3>
+
+      <!-- 提示欄 -->
+      <div id="game-hint" class="text-xs text-[#164a84] bg-[#f0f7ff] border-l-4 border-[#164a84] p-3 rounded-r-xl mb-5 hidden">
+      </div>
+
+      <!-- 選項容器 -->
+      <div id="game-options" class="grid grid-cols-1 gap-3">
+        <!-- 動態渲染選項按鈕 -->
+      </div>
+
+      <!-- 回饋訊息欄 -->
+      <div id="game-feedback" class="mt-4 p-4 rounded-2xl border-2 border-[#132442] hidden">
+        <p id="game-feedback-text" class="text-sm font-bold m-0"></p>
+        <button id="next-question-btn" onclick="nextQuestion()" class="mt-3 btn-brutal btn-orange px-5 py-2 text-xs font-black">
+          下一題 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 成績排行榜 / 學習概覽視窗 -->
+  <div id="stats-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="modal-box bg-white w-full max-w-md rounded-3xl p-6 relative">
+      <button onclick="closeStatsModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full border-2 border-[#132442] flex items-center justify-center bg-gray-100 hover:bg-gray-200">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="flex items-center gap-2 mb-4">
+        <i data-lucide="award" class="w-6 h-6 text-[#f46d43]"></i>
+        <h3 class="text-xl font-black text-[#132442] m-0">我的挑戰戰報</h3>
+      </div>
+      <p class="text-xs text-[#164a84] font-medium mb-4">你在本機裝置所累積的內建小遊戲成果：</p>
+      
+      <div class="bg-[#fffaf0] border-2 border-[#132442] p-4 rounded-2xl mb-4 flex justify-around text-center">
+        <div>
+          <p class="text-xs font-bold text-gray-500 m-0">總答對題數</p>
+          <p id="stat-total-correct" class="text-2xl font-black text-[#43aa8b] m-0">0</p>
+        </div>
+        <div class="border-r border-[#132442]/20"></div>
+        <div>
+          <p class="text-xs font-bold text-gray-500 m-0">連續答對最高</p>
+          <p id="stat-max-streak" class="text-2xl font-black text-[#f46d43] m-0">0</p>
+        </div>
+      </div>
+
+      <button onclick="resetStats()" class="btn-clear text-xs text-gray-500 w-full text-center py-1">
+        重設我的答題紀錄
+      </button>
+    </div>
+  </div>
+
   <script>
+    // 6 大單元內建挑戰題庫 (每個主題精選題目)
+    const UNIT_QUESTIONS = {
+      decimal: [
+        {
+          q: "計算：$4.8 \\div 0.16$ 的值是多少？",
+          options: ["0.3", "3", "30", "300"],
+          correct: 2,
+          hint: "提示：把被除數和除數同時乘以 100，變成 480 ÷ 16。",
+          exp: "正確！除數與被除數同乘 100 後得 480 ÷ 16 = 30。"
+        },
+        {
+          q: "一盒餅乾售 12.5 元，小明買了 4 盒，付 100 元應找回多少元？",
+          options: ["50 元", "48 元", "40 元", "60 元"],
+          correct: 0,
+          hint: "提示：先算 4 盒總價 12.5 × 4，再用 100 減去總價。",
+          exp: "正確！12.5 × 4 = 50 元，100 - 50 = 50 元。"
+        },
+        {
+          q: "計算：$7.2 \\times 1.5 - 3.6 \\div 0.6$ =",
+          options: ["4.8", "6.2", "7.2", "10.2"],
+          correct: 0,
+          hint: "提示：先乘除後加減。7.2 × 1.5 = 10.8，3.6 ÷ 0.6 = 6。",
+          exp: "正確！10.8 - 6 = 4.8。"
+        }
+      ],
+      conversion: [
+        {
+          q: "把分數 $\\frac{3}{8}$ 化為百分數是多少？",
+          options: ["37.5%", "38%", "32.5%", "35%"],
+          correct: 0,
+          hint: "提示：1/8 = 12.5%，那麼 3 個 1/8 是多少？",
+          exp: "正確！3 ÷ 8 = 0.375 = 37.5%。"
+        },
+        {
+          q: "一件外套原價 400 元，現以八折出售，現售價是多少？",
+          options: ["320 元", "340 元", "360 元", "80 元"],
+          correct: 0,
+          hint: "提示：八折即是原價的 80% 或 0.8 倍。",
+          exp: "正確！400 × 80% = 320 元。"
+        },
+        {
+          q: "把 0.04 化為最簡分數是？",
+          options: ["1/4", "1/20", "1/25", "4/25"],
+          correct: 2,
+          hint: "提示：0.04 = 4/100，上下同除以最大公因數 4。",
+          exp: "正確！4/100 = 1/25。"
+        }
+      ],
+      average: [
+        {
+          q: "小明前四次常識測驗得分分別為 80、85、90、85 分，他的平均分是多少？",
+          options: ["82.5 分", "85 分", "87.5 分", "88 分"],
+          correct: 1,
+          hint: "提示：將四次分數相加除以 4。",
+          exp: "正確！總分 (80+85+90+85) = 340，340 ÷ 4 = 85 分。"
+        },
+        {
+          q: "五個數字的平均數是 14。若加入數字 20，這六個數字的平均數是多少？",
+          options: ["14", "15", "16", "17"],
+          correct: 1,
+          hint: "提示：原總和為 14 × 5 = 70，新總和為 70 + 20 = 90，再除以 6。",
+          exp: "正確！新總和 90 ÷ 6 = 15。"
+        }
+      ],
+      circle: [
+        {
+          q: "一個圓形花園的直徑是 14 米，它的周界是多少米？（取 $\\pi = \\frac{22}{7}$）",
+          options: ["22 米", "44 米", "88 米", "154 米"],
+          correct: 1,
+          hint: "提示：圓周公式 $C = \\pi \\times d$。",
+          exp: "正確！14 × 22/7 = 44 米。"
+        },
+        {
+          q: "半徑為 5 cm 的圓形，若 $\\pi \\approx 3.14$，其圓周長度是多少？",
+          options: ["15.7 cm", "31.4 cm", "62.8 cm", "78.5 cm"],
+          correct: 1,
+          hint: "提示：直徑為 5 × 2 = 10 cm，圓周 = 直徑 × 3.14。",
+          exp: "正確！10 × 3.14 = 31.4 cm。"
+        }
+      ],
+      speed: [
+        {
+          q: "一輛火車以每小時 90 公里的速度行駛，30 分鐘可行駛多少公里？",
+          options: ["45 公里", "30 公里", "60 公里", "180 公里"],
+          correct: 0,
+          hint: "提示：30 分鐘等於 0.5 小時。距離 = 速率 × 時間。",
+          exp: "正確！90 × 0.5 = 45 公里。"
+        },
+        {
+          q: "小跑選手以 6 m/s 的速率跑了 120 米，他用了多少秒？",
+          options: ["15 秒", "20 秒", "24 秒", "720 秒"],
+          correct: 1,
+          hint: "提示：時間 = 距離 ÷ 速率。",
+          exp: "正確！120 ÷ 6 = 20 秒。"
+        }
+      ],
+      equation: [
+        {
+          q: "解方程：$3x + 7 = 25$，未知數 $x$ 的值是多少？",
+          options: ["4", "6", "8", "10"],
+          correct: 1,
+          hint: "提示：兩邊先減 7 得到 3x = 18，再兩邊除以 3。",
+          exp: "正確！3x = 18，故 x = 6。"
+        },
+        {
+          q: "某數的 4 倍減去 5 等於 19。若設某數為 $y$，下列哪道方程正確？",
+          options: ["4y + 5 = 19", "4y - 5 = 19", "4(y - 5) = 19", "y/4 - 5 = 19"],
+          correct: 1,
+          hint: "提示：某數的 4 倍是 4y，減去 5 寫作 4y - 5。",
+          exp: "正確！列式為 4y - 5 = 19。"
+        }
+      ]
+    };
+
+    const UNIT_NAMES = {
+      decimal: "小數四則運算",
+      conversion: "百分數互化",
+      average: "平均數統計",
+      circle: "圓周與圓周率",
+      speed: "速率與行程",
+      equation: "簡易方程與應用"
+    };
+
+    // 狀態管理
+    let currentTopic = null;
+    let currentQIndex = 0;
+    let answered = false;
+
+    // 本機紀錄管理
+    function getStats() {
+      const stored = localStorage.getItem("6b_math_stats");
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return { totalCorrect: 0, currentStreak: 0, maxStreak: 0 };
+    }
+
+    function saveStats(stats) {
+      localStorage.setItem("6b_math_stats", JSON.stringify(stats));
+    }
+
+    // 啟動與自訂網址
     function setStatus(topic, message, color) {
       const status = document.getElementById(topic + "-status");
-      status.textContent = message;
-      status.style.color = color;
+      if (status) {
+        status.textContent = message;
+        status.style.color = color;
+      }
     }
 
     function normaliseUrl(value) {
       const trimmed = value.trim();
       if (!trimmed) return null;
       const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : "https://" + trimmed;
-
       try {
         const parsed = new URL(withProtocol);
         return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : null;
@@ -347,31 +737,190 @@
       const url = normaliseUrl(input.value);
 
       if (!input.value.trim()) {
-        setStatus(topic, "請先貼上遊戲連結。", "#f46d43");
+        setStatus(topic, "請先貼上遊戲或練習網址。", "#f46d43");
         input.focus();
         return;
       }
 
       if (!url) {
-        setStatus(topic, "請輸入有效網址，例如 https://example.com", "#f46d43");
+        setStatus(topic, "請輸入有效網址（如 https://...）", "#f46d43");
         input.focus();
         return;
       }
 
+      // 儲存到 localStorage 方便學生下次使用
+      localStorage.setItem("6b_saved_url_" + topic, url);
       window.open(url, "_blank", "noopener,noreferrer");
-      setStatus(topic, "已在新分頁開啟遊戲！", "#248565");
+      setStatus(topic, "✓ 已在分頁開啟並為你儲存連結！", "#43aa8b");
     }
 
     function clearGame(topic) {
       const input = document.getElementById(topic + "-url");
       input.value = "";
-      setStatus(topic, "連結已清除，可隨時加入新的遊戲網址。", "#164a84");
+      localStorage.removeItem("6b_saved_url_" + topic);
+      setStatus(topic, "連結已重設。", "#164a84");
       input.focus();
     }
 
+    // 內建模擬小遊戲邏輯
+    function startBuiltInGame(topic) {
+      currentTopic = topic;
+      currentQIndex = 0;
+      answered = false;
+
+      document.getElementById("game-category-tag").textContent = UNIT_NAMES[topic] || "數學挑戰";
+      renderQuestion();
+      document.getElementById("game-modal").classList.remove("hidden");
+      lucide.createIcons();
+    }
+
+    function closeGameModal() {
+      document.getElementById("game-modal").classList.add("hidden");
+    }
+
+    function renderQuestion() {
+      const questions = UNIT_QUESTIONS[currentTopic];
+      if (!questions || currentQIndex >= questions.length) {
+        // 完成單元
+        renderComplete();
+        return;
+      }
+
+      answered = false;
+      const q = questions[currentQIndex];
+
+      document.getElementById("game-progress").textContent = `題目 ${currentQIndex + 1} / ${questions.length}`;
+      document.getElementById("game-question").textContent = q.q;
+
+      // 提示
+      const hintEl = document.getElementById("game-hint");
+      if (q.hint) {
+        hintEl.textContent = q.hint;
+        hintEl.classList.remove("hidden");
+      } else {
+        hintEl.classList.add("hidden");
+      }
+
+      // 隱藏回饋欄
+      const feedbackEl = document.getElementById("game-feedback");
+      feedbackEl.classList.add("hidden");
+
+      // 渲染選項
+      const optContainer = document.getElementById("game-options");
+      optContainer.innerHTML = "";
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "w-full text-left p-4 rounded-2xl border-2 border-[#132442] bg-white font-bold text-sm md:text-base hover:bg-[#ffd166]/20 transition-all flex items-center justify-between";
+        btn.innerHTML = `<span><strong class="mr-2.5 text-[#164a84]">${String.fromCharCode(65 + idx)}.</strong> ${optText}</span>`;
+        btn.onclick = () => selectOption(idx, btn);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedIdx, btnElement) {
+      if (answered) return;
+      answered = true;
+
+      const q = UNIT_QUESTIONS[currentTopic][currentQIndex];
+      const isCorrect = selectedIdx === q.correct;
+      const stats = getStats();
+
+      const feedbackEl = document.getElementById("game-feedback");
+      const feedbackText = document.getElementById("game-feedback-text");
+      const nextBtn = document.getElementById("next-question-btn");
+
+      feedbackEl.classList.remove("hidden");
+
+      // 選項上色
+      const allButtons = document.getElementById("game-options").children;
+      for (let i = 0; i < allButtons.length; i++) {
+        if (i === q.correct) {
+          allButtons[i].classList.add("bg-[#43aa8b]/25", "border-[#43aa8b]");
+        } else if (i === selectedIdx && !isCorrect) {
+          allButtons[i].classList.add("bg-[#f46d43]/20", "border-[#f46d43]");
+        }
+      }
+
+      if (isCorrect) {
+        stats.totalCorrect += 1;
+        stats.currentStreak += 1;
+        if (stats.currentStreak > stats.maxStreak) {
+          stats.maxStreak = stats.currentStreak;
+        }
+        feedbackEl.className = "mt-4 p-4 rounded-2xl border-2 border-[#43aa8b] bg-[#eafaf4] text-[#132442]";
+        feedbackText.innerHTML = `🎉 <strong>答對了！</strong> ${q.exp}`;
+      } else {
+        stats.currentStreak = 0;
+        feedbackEl.className = "mt-4 p-4 rounded-2xl border-2 border-[#f46d43] bg-[#fff3f0] text-[#132442]";
+        feedbackText.innerHTML = `❌ <strong>差一點點！</strong> 正確答案是 (${String.fromCharCode(65 + q.correct)})。<br><span class="text-xs text-gray-700">${q.exp}</span>`;
+      }
+
+      saveStats(stats);
+      nextBtn.textContent = (currentQIndex + 1 < UNIT_QUESTIONS[currentTopic].length) ? "下一題" : "查看單元成果";
+      lucide.createIcons();
+    }
+
+    function nextQuestion() {
+      currentQIndex++;
+      renderQuestion();
+    }
+
+    function renderComplete() {
+      document.getElementById("game-question").textContent = "🏆 太棒了！單元挑戰全部完成！";
+      document.getElementById("game-hint").classList.add("hidden");
+      document.getElementById("game-feedback").classList.add("hidden");
+
+      const optContainer = document.getElementById("game-options");
+      optContainer.innerHTML = `
+        <div class="text-center py-6">
+          <p class="text-sm font-medium text-[#164a84] mb-5">
+            你已經完成這個單元的所有練習，數學敏銳度又提升了一步！
+          </p>
+          <div class="flex items-center justify-center gap-3">
+            <button onclick="startBuiltInGame('${currentTopic}')" class="btn-brutal btn-orange px-5 py-2.5 text-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 再練一次
+            </button>
+            <button onclick="closeGameModal()" class="btn-brutal btn-navy px-5 py-2.5 text-sm">
+              <i data-lucide="check" class="w-4 h-4"></i> 回到單元選單
+            </button>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // 戰報視窗
+    function openStatsModal() {
+      const stats = getStats();
+      document.getElementById("stat-total-correct").textContent = stats.totalCorrect;
+      document.getElementById("stat-max-streak").textContent = stats.maxStreak;
+      document.getElementById("stats-modal").classList.remove("hidden");
+      lucide.createIcons();
+    }
+
+    function closeStatsModal() {
+      document.getElementById("stats-modal").classList.add("hidden");
+    }
+
+    function resetStats() {
+      if (confirm("確定要重設答題紀錄嗎？")) {
+        localStorage.removeItem("6b_math_stats");
+        openStatsModal();
+      }
+    }
+
+    // 頁面載入時回復已儲存的自訂網址
     document.addEventListener("DOMContentLoaded", function () {
+      ["decimal", "conversion", "average", "circle", "speed", "equation"].forEach(topic => {
+        const saved = localStorage.getItem("6b_saved_url_" + topic);
+        if (saved) {
+          const input = document.getElementById(topic + "-url");
+          if (input) input.value = saved;
+        }
+      });
       lucide.createIcons();
     });
   </script>
- </body>
+</body>
 </html>
